@@ -3,8 +3,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import SFProDisplayLight from 'next/font/local';
 import AppleGaramondItalic from "next/font/local";
-import Image from "next/image";
-import { useState, Suspense, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import AboutMeTimeLine from "@/app/ui/aboutmetimeline";
 import dynamic from "next/dynamic";
 import TPPopup from "@/app/ui/aboutmepopup/education-TPpopup";
@@ -82,7 +81,7 @@ function AboutMe() {
 
             <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-[15%]">
                 <p className={`mt-5 ${appleGaramondItalic.className} text-4xl text-center mb-5 color-word -z-15`}>Education</p>
-                <div style={{ contentVisibility: "auto", containIntrinsicSize: "129px 155px" }} className="p-6">
+                <div style={{ containIntrinsicSize: "129px 155px" }} className="p-6">
                     <AboutMeFolderDynamic
                         images={[
                             { src: "edu-tp-1", alt: "test" },
@@ -94,15 +93,8 @@ function AboutMe() {
                         onClick={() => setTpPopup(true)}
                     />
                 </div>
-                <AnimatePresence>
-                    {
-                        tpPopup && (
-                            <TPPopup onClose={() => setTpPopup(false)} />
-                        )
-                    }
-                </AnimatePresence>
 
-                <div style={{ contentVisibility: "auto", containIntrinsicSize: "129px 155px" }} className="p-6">
+                <div style={{ containIntrinsicSize: "129px 155px" }} className="p-6">
                     <AboutMeFolderDynamic
                         images={[
                             { src: "edu-bk-1", alt: "test" },
@@ -114,87 +106,64 @@ function AboutMe() {
                         onClick={() => setBkPopup(true)}
                     />
                 </div>
-
-                <AnimatePresence>
-                    {
-                        bkPopup && (
-                            <BKPopup onClose={() => setBkPopup(false)} />
-                        )
-                    }
-                </AnimatePresence>
             </div>
 
-            <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-[15%]">
+            <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-24">
                 <p className={`mt-5 ${appleGaramondItalic.className} text-4xl text-center mb-5 color-word`}>Skills</p>
 
-                <div style={{ contentVisibility: "auto", containIntrinsicSize: "129px 155px" }} className="p-8 relative -left-16" >
-                    <AboutMeFolderDynamic
-                        images={[
-                            { src: "expo-fill", alt: "test" },
-                            { src: "reactnative-fill", alt: "test" },
-                            { src: "typescript-fill", alt: "test" }
-                        ]}
-                        title={"Front-end Engineer"}
-                        descriptionText="(Web & Mobile)"
-                        onClick={() => setEngineerPopup(true)}
-                    />
-                </div>
-
-                <AnimatePresence>
-                    {
-                        engineerPopup && (
-                            <EngineerPopup onClose={() => setEngineerPopup(false)} />
-                        )
-                    }
-                </AnimatePresence>
-
-                <div style={{ contentVisibility: "auto", containIntrinsicSize: "129px 155px" }} className="p-8 relative left-16 bottom-8">
-                    <AboutMeFolderDynamic
-                        images={[
-                            { src: "media-thumb-1", alt: "test" },
-                            { src: "media-thumb-2", alt: "test" },
-                            { src: "media-thumb-3", alt: "test" }
-                        ]}
-                        title={"Multimedia Producer"}
-                        descriptionText="(Photo & Video)"
-                        onClick={() => setMultimediaPopup(true)}
-                    />
-                </div>
-
-                <AnimatePresence>
-                    {
-                        multimediaPopup && (
-                            <MultimediaPopup onClose={() => { setMultimediaPopup(false) }} />
-                        )
-                    }
-                </AnimatePresence>
-
-
-                <div style={{ contentVisibility: "auto", containIntrinsicSize: "129px 155px" }} className="p-8 relative right-2 bottom-10">
+                {/* Folder 1: Product Management & Design */}
+                <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative -left-16" >
                     <AboutMeFolderDynamic
                         images={[
                             { src: "uiux-1", alt: "test" },
                             { src: "uiux-2", alt: "test" },
                             { src: "uiux-3", alt: "test" }
                         ]}
-                        title={"UI/UX Design"}
+                        title={"Product Management & Design"}
                         onClick={() => setUxuiPopup(true)}
                     />
                 </div>
 
-                <AnimatePresence>
-                    {
-                        uxuiPopup && (
-                            <UIUXPopup onClose={() => setUxuiPopup(false)} />
-                        )
-                    }
-                </AnimatePresence>
+                {/* Folder 2: Software Engineering */}
+                <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative left-16 -mt-6">
+                    <AboutMeFolderDynamic
+                        images={[
+                            { src: "expo-fill", alt: "test" },
+                            { src: "reactnative-fill", alt: "test" },
+                            { src: "typescript-fill", alt: "test" }
+                        ]}
+                        title={"Software Engineering"}
+                        onClick={() => setEngineerPopup(true)}
+                    />
+                </div>
+
+                {/* Folder 3: Media Producer */}
+                <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative right-2 -mt-6">
+                    <AboutMeFolderDynamic
+                        images={[
+                            { src: "media-thumb-1", alt: "test" },
+                            { src: "media-thumb-2", alt: "test" },
+                            { src: "media-thumb-3", alt: "test" }
+                        ]}
+                        title={"Media Producer"}
+                        onClick={() => setMultimediaPopup(true)}
+                    />
+                </div>
             </div>
 
             <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-[25%]">
                 <p className={`mt-5 ${appleGaramondItalic.className} text-4xl text-center mb-5 color-word`}>Experience</p>
                 <AboutMeTimeLine />
             </div>
+
+            {/* Global Popups Portal */}
+            <AnimatePresence>
+                {tpPopup && <TPPopup onClose={() => setTpPopup(false)} />}
+                {bkPopup && <BKPopup onClose={() => setBkPopup(false)} />}
+                {uxuiPopup && <UIUXPopup onClose={() => setUxuiPopup(false)} />}
+                {engineerPopup && <EngineerPopup onClose={() => setEngineerPopup(false)} />}
+                {multimediaPopup && <MultimediaPopup onClose={() => setMultimediaPopup(false)} />}
+            </AnimatePresence>
         </motion.div>
     )
 }

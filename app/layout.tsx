@@ -38,7 +38,7 @@ export default function RootLayout({
             {children}
         </div>
 
-        <div className="absolute">
+        <div className="relative z-[60]">
           <MobileNavigationBar />
         </div>
 
