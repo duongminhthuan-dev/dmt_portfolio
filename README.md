@@ -1,5 +1,23 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+Project này sử dụng [Cloudinary](https://cloudinary.com/) (thông qua `next-cloudinary`) để hiển thị hình ảnh. 
+
+Trước khi chạy dự án, hãy tạo file `.env.local` ở thư mục gốc (hoặc copy từ `.env.example`) và điền Cloud Name của bạn:
+
+```bash
+cp .env.example .env.local
+```
+
+Trong file `.env.local`:
+
+```env
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+```
+
+> **Lưu ý:** Lấy Cloud Name từ Dashboard tài khoản Cloudinary của bạn: [Cloudinary Console](https://console.cloudinary.com/).
+
 ## Getting Started
 
 First, run the development server:

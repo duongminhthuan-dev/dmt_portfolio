@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
-import { motion, AnimatePresence, MotionConfig } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const sfProDisplayLight = SFProDisplayLight({
     weight:"200",
@@ -17,11 +17,84 @@ const sfProDisplayMedium = SFProDisplayMedium({
     variable: "--SFProDisplayMedium",
 })
 
+// Timeline configuration
+const MONTH_WIDTH = 48; // Fixed width per month in pixels
+const START_OFFSET = 24; // Left padding in pixels
+const GAP_WIDTH = 90;    // Compressed width for year 2025
+
+// Segment 1: Late 2022 - Late 2024
+const SEGMENT_1 = [
+    { year: 2022, month: "Sep", isYear: false },
+    { year: 2022, month: "Oct", isYear: true },  // GDSC Start (Index 1)
+    { year: 2022, month: "Nov", isYear: false },
+    { year: 2022, month: "Dec", isYear: false },
+    { year: 2023, month: "Jan", isYear: true },   // Index 4
+    { year: 2023, month: "Feb", isYear: false },
+    { year: 2023, month: "Mar", isYear: false },
+    { year: 2023, month: "Apr", isYear: false },
+    { year: 2023, month: "May", isYear: false },
+    { year: 2023, month: "Jun", isYear: false },
+    { year: 2023, month: "Jul", isYear: false },
+    { year: 2023, month: "Aug", isYear: false },
+    { year: 2023, month: "Sep", isYear: false },
+    { year: 2023, month: "Oct", isYear: false },
+    { year: 2023, month: "Nov", isYear: false },
+    { year: 2023, month: "Dec", isYear: false },
+    { year: 2024, month: "Jan", isYear: true },   // GAM Start (Index 16)
+    { year: 2024, month: "Feb", isYear: false },
+    { year: 2024, month: "Mar", isYear: false },
+    { year: 2024, month: "Apr", isYear: false },
+    { year: 2024, month: "May", isYear: false },
+    { year: 2024, month: "Jun", isYear: false },  // GDSC End (Index 21)
+    { year: 2024, month: "Jul", isYear: false },
+    { year: 2024, month: "Aug", isYear: false },
+    { year: 2024, month: "Sep", isYear: false },  // GAM End (Index 24)
+    { year: 2024, month: "Oct", isYear: false },
+];
+
+// Segment 2: Year 2026 (ShopBack)
+const SEGMENT_2 = [
+    { year: 2026, month: "Jan", isYear: true },   // Index 0
+    { year: 2026, month: "Feb", isYear: false },  // ShopBack Start (Index 1)
+    { year: 2026, month: "Mar", isYear: false },
+    { year: 2026, month: "Apr", isYear: false },
+    { year: 2026, month: "May", isYear: false },
+    { year: 2026, month: "Jun", isYear: false },
+    { year: 2026, month: "Jul", isYear: false },
+    { year: 2026, month: "Aug", isYear: false },
+    { year: 2026, month: "Sep", isYear: false },  // ShopBack End (Index 8)
+    { year: 2026, month: "Oct", isYear: false },
+];
+
+// Coordinate Calculations:
+// GDSC (Oct '22 - Jun '24)
+const GDSC_PILL_WIDTH = 288; // w-72
+const gdscLeft = START_OFFSET + MONTH_WIDTH;
+const gdscTotalWidth = (21 - 1 + 1) * MONTH_WIDTH;
+const gdscLineWidth = Math.max(0, gdscTotalWidth - GDSC_PILL_WIDTH);
+
+// GAM (Jan '24 - Sep '24)
+const GAM_PILL_WIDTH = 256; // w-64
+const gamLeft = START_OFFSET + 16 * MONTH_WIDTH;
+const gamTotalWidth = (24 - 16 + 1) * MONTH_WIDTH;
+const gamLineWidth = Math.max(0, gamTotalWidth - GAM_PILL_WIDTH);
+
+// Segment 2 starting X (after Segment 1 + Gap)
+const segment2StartX = START_OFFSET + SEGMENT_1.length * MONTH_WIDTH + GAP_WIDTH;
+
+// ShopBack (Feb '26 - Sep '26)
+const SHOPBACK_PILL_WIDTH = 256; // w-64
+const shopbackLeft = segment2StartX + MONTH_WIDTH;
+const shopbackTotalWidth = (8 - 1 + 1) * MONTH_WIDTH;
+const shopbackLineWidth = Math.max(0, shopbackTotalWidth - SHOPBACK_PILL_WIDTH);
+
+const TOTAL_TRACK_WIDTH = segment2StartX + SEGMENT_2.length * MONTH_WIDTH + 40;
+
 function AboutMeTimeLine() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [active, setActive] = useState<null | 'org' | 'head' | 'gam'>(null);
+    const [active, setActive] = useState<null | 'gdsc' | 'gam' | 'shopback'>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const totalDots = 2; // Number of snap points
+    const totalDots = 3;
 
     useEffect(() => {
         const container = scrollContainerRef.current;
@@ -29,9 +102,13 @@ function AboutMeTimeLine() {
 
         const handleScroll = () => {
             const scrollLeft = container.scrollLeft;
-            const containerWidth = container.clientWidth;
-            const index = Math.round(scrollLeft / containerWidth);
-            setCurrentIndex(index);
+            if (scrollLeft < gamLeft - 100) {
+                setCurrentIndex(0); // GDSC Section
+            } else if (scrollLeft < shopbackLeft - 150) {
+                setCurrentIndex(1); // GAM Section
+            } else {
+                setCurrentIndex(2); // ShopBack Section
+            }
         };
 
         container.addEventListener('scroll', handleScroll);
@@ -42,7 +119,11 @@ function AboutMeTimeLine() {
         const container = scrollContainerRef.current;
         if (!container) return;
 
-        const targetScrollLeft = index * container.clientWidth;
+        let targetScrollLeft = 0;
+        if (index === 0) targetScrollLeft = 0;
+        if (index === 1) targetScrollLeft = Math.max(0, gamLeft - 40);
+        if (index === 2) targetScrollLeft = Math.max(0, shopbackLeft - 40);
+
         container.scrollTo({
             left: targetScrollLeft,
             behavior: 'smooth'
@@ -51,75 +132,235 @@ function AboutMeTimeLine() {
 
     return (
         <div className="relative w-full">
-            {/* Snap scrolling container */}
+            {/* Horizontal Scrollable Timeline Container */}
             <div
                 ref={scrollContainerRef}
-                className="overflow-x-scroll w-full flex flex-row snap-x snap-mandatory touch-pan-x scrollbar-hide"
+                className="overflow-x-scroll w-full flex flex-row touch-pan-x scrollbar-hide select-none pt-2 pb-3"
             >
-                <div className="relative h-full flex flex-row">
+                <div
+                    className="relative shrink-0"
+                    style={{ width: `${TOTAL_TRACK_WIDTH}px`, height: '175px' }}
+                >
+                    {/* --- GDSC TRACK (PILL + LINE CENTERED) --- */}
                     <div
-                        className="w-[90vw] shrink-0 snap-start bg-none transition-all duration-500 ease-in-out"
-                        style={{ height: active ? '224px' : '256px' }}
-                    ></div>
-                    <div
-                        className="w-[90vw] shrink-0 snap-start bg-none transition-all duration-500 ease-in-out"
-                        style={{ height: active ? '224px' : '256px' }}
-                    ></div>
-
-                    {/* Pills */}
-                    <div
-                        className={`absolute top-8 left-6 h-10 w-64 flex items-center pl-4 rounded-full ${(active === null || active === "org") ? "opacity-100" : "opacity-30"} transition-all duration-300 cursor-pointer`}
+                        className={`absolute flex items-center cursor-pointer transition-all duration-300 ${
+                            active === null || active === 'gdsc' ? 'opacity-100' : 'opacity-30'
+                        }`}
                         style={{
-                            border: '1px solid #F1F1F1',
-                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
-                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-                            backdropFilter: 'blur(2px)',
+                            left: `${gdscLeft}px`,
+                            top: '10px',
                         }}
-                        onClick={() => {
-                            setActive("org");
-                        }}
+                        onClick={() => setActive(active === 'gdsc' ? null : 'gdsc')}
                     >
-                        <p className={`${sfProDisplayMedium.className} text-sm text-[#888888]`}>GDSC HCMUT - Organizer</p>
+                        {/* GDSC Pill */}
+                        <div
+                            className="h-10 w-80 shrink-0 flex items-center pl-4 rounded-full transition-all duration-300 z-10"
+                            style={{
+                                border: '1px solid #F1F1F1',
+                                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(221, 221, 221, 0.40) 31.73%, rgba(221, 221, 221, 0.40) 65.38%, rgba(255, 255, 255, 0.45) 100%)',
+                                boxShadow: '0 8px 15px rgba(0, 0, 0, 0.15)',
+                                backdropFilter: 'blur(4px)',
+                            }}
+                        >
+                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444] truncate pr-3`}>
+                                GDSC HCMUT - Marketing Lead & Organizer
+                            </p>
+                        </div>
+
+                        {/* Duration Line starting at the right end of Pill */}
+                        <div
+                            className={`h-[3px] rounded-r-full -ml-[1px] transition-colors duration-300 ${
+                                active === 'gdsc' ? 'bg-[#BA0000]' : 'bg-[#D0D0D0] hover:bg-[#B5B5B5]'
+                            }`}
+                            style={{ width: `${gdscLineWidth}px` }}
+                        />
+
+                        {/* End marker dot */}
+                        <div
+                            className={`w-2 h-2 rounded-full shrink-0 -ml-1 transition-colors duration-300 ${
+                                active === 'gdsc' ? 'bg-[#BA0000]' : 'bg-[#999999]'
+                            }`}
+                        />
                     </div>
 
-                    <div className="flex-1"></div>
-                    
+                    {/* --- GAM TRACK (PILL + LINE CENTERED) --- */}
                     <div
-                        className={`absolute top-1/2 -translate-y-1/2 left-[100vw] flex pl-4 items-center -translate-x-1/2 h-10 w-64 rounded-full ${(active === null || active === "head") ? "opacity-100" : "opacity-30"} transition-all duration-300 cursor-pointer`}
+                        className={`absolute flex items-center cursor-pointer transition-all duration-300 ${
+                            active === null || active === 'gam' ? 'opacity-100' : 'opacity-30'
+                        }`}
                         style={{
-                            border: '1px solid #F1F1F1',
-                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
-                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-                            backdropFilter: 'blur(2px)',
+                            left: `${gamLeft}px`,
+                            top: '62px',
                         }}
-                        onClick={() => {
-                            setActive("head");
-                        }}
+                        onClick={() => setActive(active === 'gam' ? null : 'gam')}
                     >
-                        <p className={`${sfProDisplayMedium.className} text-sm text-[#888888]`}>GDSC HCMUT - Head of Marketing</p>
+                        {/* GAM Pill */}
+                        <div
+                            className="h-10 w-64 shrink-0 flex pl-4 items-center rounded-full transition-all duration-300 z-10"
+                            style={{
+                                border: '1px solid #F1F1F1',
+                                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(221, 221, 221, 0.40) 31.73%, rgba(221, 221, 221, 0.40) 65.38%, rgba(255, 255, 255, 0.45) 100%)',
+                                boxShadow: '0 8px 15px rgba(0, 0, 0, 0.15)',
+                                backdropFilter: 'blur(4px)',
+                            }}
+                        >
+                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444]`}>
+                                GAM Esports - Video Editor
+                            </p>
+                        </div>
+
+                        {/* Duration Line starting at the right end of Pill */}
+                        <div
+                            className={`h-[3px] rounded-r-full -ml-[1px] transition-colors duration-300 ${
+                                active === 'gam' ? 'bg-[#BA0000]' : 'bg-[#D0D0D0] hover:bg-[#B5B5B5]'
+                            }`}
+                            style={{ width: `${gamLineWidth}px` }}
+                        />
+
+                        {/* End marker dot */}
+                        <div
+                            className={`w-2 h-2 rounded-full shrink-0 -ml-1 transition-colors duration-300 ${
+                                active === 'gam' ? 'bg-[#BA0000]' : 'bg-[#999999]'
+                            }`}
+                        />
                     </div>
-                    
-                    <div className="flex-1"></div>
-                    
+
+                    {/* --- SHOPBACK TRACK (PILL + LINE CENTERED) --- */}
                     <div
-                        className={`absolute bottom-8 right-6 h-10 w-64 flex pl-4 items-center rounded-full ${(active === null || active === "gam") ? "opacity-100" : "opacity-30"} transition-all duration-300 cursor-pointer`}
+                        className={`absolute flex items-center cursor-pointer transition-all duration-300 ${
+                            active === null || active === 'shopback' ? 'opacity-100' : 'opacity-30'
+                        }`}
                         style={{
-                            border: '1px solid #F1F1F1',
-                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
-                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-                            backdropFilter: 'blur(2px)',
+                            left: `${shopbackLeft}px`,
+                            top: '10px',
                         }}
-                        onClick={() => {
-                            setActive("gam");
-                        }}
+                        onClick={() => setActive(active === 'shopback' ? null : 'shopback')}
                     >
-                        <p className={`${sfProDisplayMedium.className} text-sm text-[#888888]`}>GAM Esports - Video Editor</p>
+                        {/* ShopBack Pill */}
+                        <div
+                            className="h-10 w-64 shrink-0 flex items-center pl-4 rounded-full transition-all duration-300 z-10"
+                            style={{
+                                border: '1px solid #F1F1F1',
+                                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(221, 221, 221, 0.40) 31.73%, rgba(221, 221, 221, 0.40) 65.38%, rgba(255, 255, 255, 0.45) 100%)',
+                                boxShadow: '0 8px 15px rgba(0, 0, 0, 0.15)',
+                                backdropFilter: 'blur(4px)',
+                            }}
+                        >
+                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444] truncate pr-3`}>
+                                ShopBack - Software Engineer
+                            </p>
+                        </div>
+
+                        {/* Duration Line starting at the right end of Pill */}
+                        <div
+                            className={`h-[3px] rounded-r-full -ml-[1px] transition-colors duration-300 ${
+                                active === 'shopback' ? 'bg-[#BA0000]' : 'bg-[#D0D0D0] hover:bg-[#B5B5B5]'
+                            }`}
+                            style={{ width: `${shopbackLineWidth}px` }}
+                        />
+
+                        {/* End marker dot */}
+                        <div
+                            className={`w-2 h-2 rounded-full shrink-0 -ml-1 transition-colors duration-300 ${
+                                active === 'shopback' ? 'bg-[#BA0000]' : 'bg-[#999999]'
+                            }`}
+                        />
+                    </div>
+
+                    {/* --- MONTHLY TIMELINE RULER --- */}
+                    <div
+                        className="absolute bottom-0 left-0 right-0 h-10"
+                        style={{ paddingLeft: `${START_OFFSET}px` }}
+                    >
+                        {/* 1. Continuous Baseline across the entire ruler on the exact same horizontal level */}
+                        <div className="flex flex-row items-center">
+                            {/* Segment 1 solid line */}
+                            <div
+                                className="border-t border-[#D0D0D0] shrink-0"
+                                style={{ width: `${SEGMENT_1.length * MONTH_WIDTH}px` }}
+                            />
+
+                            {/* 2025 dashed line on the exact same horizontal level */}
+                            <div
+                                className="border-t border-dashed border-[#888888] shrink-0"
+                                style={{ width: `${GAP_WIDTH}px` }}
+                            />
+
+                            {/* Segment 2 solid line */}
+                            <div
+                                className="border-t border-[#D0D0D0] shrink-0"
+                                style={{ width: `${SEGMENT_2.length * MONTH_WIDTH}px` }}
+                            />
+                        </div>
+
+                        {/* 2. Month ticks & labels under the baseline */}
+                        <div className="flex flex-row items-start">
+                            {/* Segment 1 months */}
+                            <div className="flex flex-row shrink-0">
+                                {SEGMENT_1.map((m, idx) => (
+                                    <div
+                                        key={`seg1-${idx}`}
+                                        className="flex flex-col items-center shrink-0"
+                                        style={{ width: `${MONTH_WIDTH}px` }}
+                                    >
+                                        <div
+                                            className={`w-[1px] ${
+                                                m.isYear ? 'h-2.5 bg-[#BA0000]' : 'h-1.5 bg-[#B8B8B8]'
+                                            }`}
+                                        />
+                                        <span className={`${sfProDisplayLight.className} text-[10px] text-[#777777] mt-0.5 select-none`}>
+                                            {m.month}
+                                        </span>
+                                        {m.isYear && (
+                                            <span className={`${sfProDisplayMedium.className} text-[11px] text-[#BA0000] -mt-0.5 font-medium select-none`}>
+                                                {m.year}
+                                            </span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* 2025 Compressed Gap Text Label under the line */}
+                            <div
+                                className="flex flex-col items-center shrink-0 pt-1.5"
+                                style={{ width: `${GAP_WIDTH}px` }}
+                            >
+                                <span className={`${sfProDisplayLight.className} text-[10px] text-[#888888] select-none tracking-wider`}>
+                                    ··· 2025 ···
+                                </span>
+                            </div>
+
+                            {/* Segment 2 months */}
+                            <div className="flex flex-row shrink-0">
+                                {SEGMENT_2.map((m, idx) => (
+                                    <div
+                                        key={`seg2-${idx}`}
+                                        className="flex flex-col items-center shrink-0"
+                                        style={{ width: `${MONTH_WIDTH}px` }}
+                                    >
+                                        <div
+                                            className={`w-[1px] ${
+                                                m.isYear ? 'h-2.5 bg-[#BA0000]' : 'h-1.5 bg-[#B8B8B8]'
+                                            }`}
+                                        />
+                                        <span className={`${sfProDisplayLight.className} text-[10px] text-[#777777] mt-0.5 select-none`}>
+                                            {m.month}
+                                        </span>
+                                        {m.isYear && (
+                                            <span className={`${sfProDisplayMedium.className} text-[11px] text-[#BA0000] -mt-0.5 font-medium select-none`}>
+                                                {m.year}
+                                            </span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Dot indicators */}
-            <div className="flex justify-center items-center mt-8 space-x-2">
+            {/* Pill-shaped pagination indicators */}
+            <div className="flex justify-center items-center mt-4 space-x-2">
                 {Array.from({ length: totalDots }, (_, index) => (
                     <button
                         key={index}
@@ -134,12 +375,11 @@ function AboutMeTimeLine() {
                 ))}
             </div>
 
-            {/* Reserved space*/}
+            {/* Reserved space for expandable detail card */}
             <div
                 className="transition-all duration-500 ease-in-out overflow-hidden"
-                style={{ height: active ? '320px' : '0px' }}
+                style={{ height: active ? '340px' : '0px' }}
             >
-                {/* Content sections with smooth animations */}
                 <AnimatePresence>
                     {active !== null && (
                         <motion.div
@@ -148,7 +388,8 @@ function AboutMeTimeLine() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            {active === "org" && (
+                            {/* GDSC Details */}
+                            {active === "gdsc" && (
                                 <div>
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
@@ -164,12 +405,12 @@ function AboutMeTimeLine() {
                                         }}
                                     >
                                         <div>
-                                            <p className={`${sfProDisplayMedium.className}`}>GDSC HCMUT</p>
-                                            <p className={`${sfProDisplayLight.className}`}>Organizer</p>
+                                            <p className={`${sfProDisplayMedium.className} text-sm`}>GDSC HCMUT</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm`}>Marketing Lead & Organizer</p>
                                         </div>
                                         <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-sm`}>
-                                            Oct &#39;22 - Jun &#39;23
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 w-28 rounded-full text-xs`}>
+                                            Oct &#39;22 - Jun &#39;24
                                         </div>
                                         <button
                                             onClick={() => {setActive(null)}}
@@ -186,7 +427,7 @@ function AboutMeTimeLine() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.2 }}
-                                        className="relative mx-6 p-4 mb-14 rounded-xl"
+                                        className="relative mx-6 p-3 mb-14 rounded-xl"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -194,73 +435,22 @@ function AboutMeTimeLine() {
                                             backdropFilter: 'blur(2px)',
                                         }}
                                     >
-                                        <p className={`${sfProDisplayLight.className} text-sm`}>- Created visual marketing elements including social media posts, banners, event photography, etc.</p>
-                                        <p className={`${sfProDisplayLight.className} text-sm mt-2`}>- Worked cross-functionally with members from Development, External Relations, and Event teams.</p>
+                                        <div className="mb-3">
+                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Led a 4-member team to deliver 3 major campaigns, including Info Seminar 2024 (largest annual event).</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Developed marketing plans to boost student engagement and support media-related activities.</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Supported team in marketing-related tasks.</p>
+                                        </div>
                                     </motion.div>
                                 </div>
                             )}
 
-                            {active === "head" && (
-                                <div>
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
-
-                                        transition={{ duration: 0.3, delay: 0.1 }}
-                                        className="mx-6 mt-5 mb-3 p-5 rounded-xl flex flex-row justify-center items-center"
-                                        style={{
-                                            border: '1px solid #F1F1F1',
-                                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
-                                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-                                            backdropFilter: 'blur(2px)',
-                                        }}
-                                    >
-                                        <div>
-                                            <p className={`${sfProDisplayMedium.className}`}>GDSC HCMUT</p>
-                                            <p className={`${sfProDisplayLight.className}`}>Head of Marketing</p>
-                                        </div>
-                                        <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-sm`}>
-                                            Jul &#39;23 - Jun &#39;24
-                                        </div>
-                                        <button
-                                            onClick={() => {setActive(null)}}
-                                            className="hover:bg-gray-200 hover:bg-opacity-30 rounded-full transition-colors duration-200"
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                                                <path d="M15 1L1.00095 14.9991M14.9991 15L1 1.00099" stroke="#444444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </motion.div>
-
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
-
-                                        transition={{ duration: 0.3, delay: 0.2 }}
-                                        className="relative mx-6 p-4 mb-14 rounded-xl"
-                                        style={{
-                                            border: '1px solid #F1F1F1',
-                                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
-                                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
-                                            backdropFilter: 'blur(2px)',
-                                        }}
-                                    >
-                                        <p className={`${sfProDisplayLight.className} text-sm`}>- Led a 4-member team to deliver 3 major campaigns, including Info Seminar 2024 (largest annual event).</p>
-                                        <p className={`${sfProDisplayLight.className} text-sm mt-2`}>- Developed marketing plans to boost student engagement and support media-related activities.</p>
-                                    </motion.div>
-                                </div>
-                            )}
-
+                            {/* GAM Details */}
                             {active === "gam" && (
                                 <div>
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
-
                                         transition={{ duration: 0.3, delay: 0.1 }}
                                         className="mx-6 mt-5 mb-3 p-4 rounded-xl flex flex-row justify-center items-center"
                                         style={{
@@ -271,11 +461,11 @@ function AboutMeTimeLine() {
                                         }}
                                     >
                                         <div>
-                                            <p className={`${sfProDisplayMedium.className}`}>GAM Esports</p>
-                                            <p className={`${sfProDisplayLight.className}`}>Video Editor</p>
+                                            <p className={`${sfProDisplayMedium.className} text-sm`}>GAM Esports</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm`}>Video Editor</p>
                                         </div>
                                         <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-sm`}>
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-xs`}>
                                             Jan &#39;24 - Sep &#39;24
                                         </div>
                                         <button
@@ -292,7 +482,6 @@ function AboutMeTimeLine() {
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
-
                                         transition={{ duration: 0.3, delay: 0.2 }}
                                         className="relative mx-6 p-4 mb-14 rounded-xl"
                                         style={{
@@ -304,6 +493,59 @@ function AboutMeTimeLine() {
                                     >
                                         <p className={`${sfProDisplayLight.className} text-sm`}>- Produced and edited videos and promo content for one of the top Vietnam E-sports teams.</p>
                                         <p className={`${sfProDisplayLight.className} mt-2 text-sm`}>- Collaborated with designers, players, and managers to deliver results under tight deadlines.</p>
+                                    </motion.div>
+                                </div>
+                            )}
+
+                            {/* ShopBack Details */}
+                            {active === "shopback" && (
+                                <div>
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3, delay: 0.1 }}
+                                        className="mx-6 mt-5 mb-3 p-4 rounded-xl flex flex-row justify-center items-center"
+                                        style={{
+                                            border: '1px solid #F1F1F1',
+                                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
+                                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
+                                            backdropFilter: 'blur(2px)',
+                                        }}
+                                    >
+                                        <div>
+                                            <p className={`${sfProDisplayMedium.className} text-sm`}>ShopBack</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm`}>Software Engineer</p>
+                                        </div>
+                                        <div className="flex-1"></div>
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-xs`}>
+                                            Feb &#39;26 - Sep &#39;26
+                                        </div>
+                                        <button
+                                            onClick={() => {setActive(null)}}
+                                            className="hover:bg-gray-200 hover:bg-opacity-30 rounded-full transition-colors duration-200"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                                                <path d="M15 1L1.00095 14.9991M14.9991 15L1 1.00099" stroke="#444444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </motion.div>
+
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3, delay: 0.2 }}
+                                        className="relative mx-6 p-4 mb-14 rounded-xl"
+                                        style={{
+                                            border: '1px solid #F1F1F1',
+                                            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
+                                            boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
+                                            backdropFilter: 'blur(2px)',
+                                        }}
+                                    >
+                                        <p className={`${sfProDisplayLight.className} text-sm`}>- Contributed to core web & mobile product features, improving user experience and performance.</p>
+                                        <p className={`${sfProDisplayLight.className} mt-2 text-sm`}>- Collaborated with regional product and engineering teams in an Agile development environment.</p>
                                     </motion.div>
                                 </div>
                             )}
