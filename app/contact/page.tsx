@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import AppleGaramondItalic from "next/font/local";
 import { useState, useEffect, useRef, useCallback } from "react";
 import SendButton from "@/app/ui/sendbutton";
@@ -177,12 +177,12 @@ function Contact() {
                     
                     <div>
                         <p className={`${sfProDisplayMedium.className}`}>Email</p>
-                        <p className={`${sfProDisplayLight.className}`}>thuan.duongminh2003@gmail.com</p>  
+                        <p className={`${sfProDisplayLight.className}`}>duongminhthuan.work@gmail.com</p>
                     </div>
 
                     <div className="mt-2">
                         <p className={`${sfProDisplayMedium.className}`}>Location</p>
-                        <p className={`${sfProDisplayLight.className}`}>Dong Hung Thuan Ward, Ho Chi Minh City, Vietnam</p>
+                        <p className={`${sfProDisplayLight.className}`}>Gia Dinh Ward, Ho Chi Minh City, Vietnam</p>
                     </div>
 
                     <div className="mt-2">
@@ -319,7 +319,7 @@ function Contact() {
             
                 <div className={`${sfProDisplayLight.className} mb-[14.5vh] text-[#888888] mx-6`}>
                     <p className="text-sm">Brought to you by Duong Minh Thuan aka Toonie</p>
-                    <p className="text-sm">Last updated: 14/12/2025</p>
+                    <p className="text-sm">Last updated: 10/10/2026</p>
                 </div>
             </div>
             {/* <AnimatePresence>
