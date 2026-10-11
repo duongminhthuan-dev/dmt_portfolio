@@ -77,14 +77,14 @@ const defaultCardItems: CardItem[] = [
     image: 'media-thumb-2',
     title: '1000 Eyes - Shot at HCMC Metro System',
     description: 'A brief description of project 2',
-    href: '/works/frontendweb/ananas'
+    href: '/works/product/ananas'
   },
   {
     id: 2,
     image: 'media-main-2',
     title: 'Quynh Lan\'s Graduation Day',
     description: 'A brief description of project 1',
-    href: '/works/frontendweb/ananas'
+    href: '/works/product/ananas'
   }
 ];
 

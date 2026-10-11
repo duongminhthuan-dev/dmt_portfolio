@@ -5,7 +5,7 @@ import {motion} from "motion/react";
 import SFMono from "next/font/local";
 import {useRouter} from "next/navigation";
 import { useEffect } from "react";
-import Stack from "@/app/ui/stackcard-web";
+import Stack from "@/app/ui/stackcard-mobile";
 
 const appleGaramondItalic = AppleGaramondItalic({
     weight:"400",
@@ -19,13 +19,13 @@ const sfMono = SFMono({
     variable: "--SFMono-Regular",
 });
 
-function FrontendWeb() {
+function SoftwareEngineering() {
     const myRouter = useRouter();
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
-
+    
         return () => {
             document.body.style.overflow = '';
             document.documentElement.style.overflow = '';
@@ -38,7 +38,7 @@ function FrontendWeb() {
                 <motion.p
                     className={`${appleGaramondItalic.className} text-4xl text-[#BA0000] mt-12 w-full text-center`}
                 >
-                    Front-end Web Developer
+                    Software Engineering
                 </motion.p>
             </div>
 
@@ -73,4 +73,4 @@ function FrontendWeb() {
     )
 }
 
-export default FrontendWeb;
+export default SoftwareEngineering;

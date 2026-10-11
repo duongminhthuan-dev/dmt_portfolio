@@ -74,17 +74,17 @@ interface StackProps {
 const defaultCardItems: CardItem[] = [
   {
     id: 1,
-    image: 'zeno_main',
-    title: 'zeno',
-    description: 'A smartwatch companion app made for the ESP32-based smartwatch. Built with React Native and TypeScript.',
-    href: '/works/softwareengineer/zeno'
+    image: 'ananas_main',
+    title: 'Ananas Redesign',
+    description: "Redeveloped the Ananas website with a modern design. A Web Programming subject's project. Built with React and Tailwind CSS.",
+    href: '/works/softwareengineering/ananas'
   },
   {
     id: 2,
     image: 'bkdocs1_main',
     title: 'BKDocs',
     description: 'A mobile app made for HCMUT students to manage their learning materials. Built with React Native.',
-    href: '/works/softwareengineer/bkdocs'
+    href: '/works/softwareengineering/bkdocs'
   }
 ];
 

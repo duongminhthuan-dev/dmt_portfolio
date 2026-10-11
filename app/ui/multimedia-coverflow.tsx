@@ -16,13 +16,13 @@ const slides = [
         img: "/images/projects/ananas/thumbnail.webp",
         title: "GIC 2023 Opening Short Film",
         desc: "Redeveloped the Ananas website with a modern design. A Web Programming subject's project. Built with React and Tailwind CSS.",
-        navigate: "/works/frontendweb/ananas",
+        navigate: "/works/product/ananas",
     },
     {
         img: "https://res.cloudinary.com/dhquqou4h/image/upload/v1765721122/talksign_thumb.webp",
         title: "1000 Eyes - Shot at HCMC Metro System",
         desc: "A web application that translates sign language into text. Built for Naver AI Hackathon 2025 Final round. Built with React and Naver Cloud Platform.",
-        navigate: "/works/frontendweb/ananas",
+        navigate: "/works/product/ananas",
     },
 ];
 

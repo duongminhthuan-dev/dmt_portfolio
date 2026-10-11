@@ -6,13 +6,8 @@ import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
 import Button from "../../../ui/gallerybutton"
-import ananas1 from "@/public/images/projects/ananas/overview1.png";
-import ananas2 from "@/public/images/projects/ananas/overview2.webp";
-import ananas3 from "@/public/images/projects/ananas/overview3.webp";
-import ananas4 from "@/public/images/projects/ananas/overview4.png";
 import {CldImage} from "next-cloudinary";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 

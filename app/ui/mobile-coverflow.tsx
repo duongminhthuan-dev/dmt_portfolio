@@ -16,13 +16,13 @@ const slides = [
         img: "https://res.cloudinary.com/dhquqou4h/image/upload/v1765082645/portrait_1Artboard_3_0.25x_g61wmb.webp",
         title: "zeno - Smartwatch Companion App",
         desc: "A smartwatch companion app made for the zeno smartwatch. Built with React Native and TypeScript.",
-        navigate: "/works/softwareengineer/zeno",
+        navigate: "/works/softwareengineering/zeno",
     },
     {
         img: "https://res.cloudinary.com/dhquqou4h/image/upload/v1765103482/bkdocs_vrhmmp.webp",
         title: "BKDocs",
         desc: "A mobile app made for HCMUT students to manage their learning materials. Built with React Native.",
-        navigate: "/works/softwareengineer/bkdocs",
+        navigate: "/works/softwareengineering/bkdocs",
     },
 ];
 

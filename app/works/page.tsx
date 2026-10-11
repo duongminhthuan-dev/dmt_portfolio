@@ -40,7 +40,7 @@ function Works() {
 
             <WorksCards
                 icon={MobileAppIcon}
-                title={"Mobile Software Engineer"}
+                title={"Product Management"}
                 className="absolute left-1/2 -translate-x-[180px] -translate-y-5"
                 flipClassName="absolute -translate-x-1/2 -translate-y-10  left-1/2"
                 rotate={4}
@@ -48,7 +48,7 @@ function Works() {
                 onToggle={() =>
                     setActiveIdx((cur) => (cur === 0 ? null : 0))
                 }
-                onClick={() => myRouter.push("/works/softwareengineer")}
+                onClick={() => myRouter.push("/works/product")}
                 z={20}
                 flipZ={30}
                 flipDurationMs={500}
@@ -56,7 +56,7 @@ function Works() {
 
             <WorksCards
                 icon={WebDevIcon}
-                title={"Front-end Web Developer"}
+                title={"Software Engineering"}
                 className="absolute left-1/2 -translate-x-[90px] -translate-y-12 z-10"
                 flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-30"
                 rotate={0}
@@ -64,7 +64,7 @@ function Works() {
                 onToggle={() =>
                     setActiveIdx((cur) => (cur === 1 ? null : 1))
                 }
-                onClick={() => myRouter.push("/works/frontendweb")}
+                onClick={() => myRouter.push("/works/softwareengineering")}
                 z={10}
                 flipZ={30}
                 flipDurationMs={500}
@@ -72,7 +72,7 @@ function Works() {
 
             <WorksCards
                 icon={MultimediaIcon}
-                title={"Multimedia Producer"}
+                title={"Media Producer"}
                 className="absolute left-1/2 -translate-x-[10px]"
                 flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-20"
                 rotate={-10}

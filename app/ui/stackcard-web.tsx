@@ -74,17 +74,24 @@ interface StackProps {
 const defaultCardItems: CardItem[] = [
   {
     id: 1,
-    image: 'ananas_main',
-    title: 'Ananas Redesign',
-    description: 'Redeveloped the Ananas website with a modern design. A Web Programming subject\'s project. Built with React and Tailwind CSS.',
-    href: '/works/frontendweb/ananas'
+    image: 'shoko-image',
+    title: 'Shoko',
+    description: 'Product design, UX research, and interface prototyping for Shoko.',
+    href: '/works/product/shoko'
   },
   {
     id: 2,
+    image: 'zeno_main',
+    title: 'zeno',
+    description: 'A smartwatch companion app made for the ESP32-based smartwatch. Built with React Native and TypeScript.',
+    href: '/works/product/zeno'
+  },
+  {
+    id: 3,
     image: 'talksign_thumb_1',
     title: 'TalkSign',
     description: 'A web application that translates sign language into text. Built for Naver AI Hackathon 2025 Final round, with React and Naver Cloud Platform.',
-    href: '/works/frontendweb/ananas'
+    href: '/works/product/talksign'
   }
 ];
 
@@ -224,6 +231,12 @@ export default function Stack({
                   fill
                   className="object-cover pointer-events-none"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  onError={(e) => {
+                    const target = e.currentTarget as HTMLImageElement;
+                    if (target && card.image === 'shoko-image') {
+                      target.src = '/images/projects/shoko/shoko_hero.jpg';
+                    }
+                  }}
                 />
               </div>
 
