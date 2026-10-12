@@ -74,7 +74,7 @@ interface StackProps {
 const defaultCardItems: CardItem[] = [
   {
     id: 1,
-    image: 'shoko-image',
+    image: 'shoko_hero',
     title: 'Shoko',
     description: 'Product design, UX research, and interface prototyping for Shoko.',
     href: '/works/product/shoko'
@@ -231,12 +231,6 @@ export default function Stack({
                   fill
                   className="object-cover pointer-events-none"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  onError={(e) => {
-                    const target = e.currentTarget as HTMLImageElement;
-                    if (target && card.image === 'shoko-image') {
-                      target.src = '/images/projects/shoko/shoko_hero.jpg';
-                    }
-                  }}
                 />
               </div>
 
