@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
-import Button from "../../../ui/gallerybutton"
+// import Button from "../../../ui/gallerybutton"
 import {CldImage} from "next-cloudinary";
 
 import { motion } from "motion/react";
@@ -178,6 +178,7 @@ export default function Ananas() {
                     </p>
                 </motion.div>
 
+                {/* Tạm ẩn Gallery Button
                 <motion.div
                     className="flex-1 rounded-xl flex items-start justify-center"
                     initial={{opacity:0, y:20}}
@@ -190,6 +191,7 @@ export default function Ananas() {
                         <Button />
                     </div>
                 </motion.div>
+                */}
             </div>
         </div>
     )
