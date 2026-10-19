@@ -46,8 +46,9 @@ export default function TalkSign() {
     }, []);
 
     return (
-        <div className="flex flex-col h-screen mx-4 py-4 gap-2">
-            <div className="flex flex-row w-full justify-center items-center">
+        <div className="h-screen overflow-y-auto scrollbar-hide overscroll-none">
+            {/* Sticky Header */}
+            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] p-4 flex flex-row w-full justify-center items-center">
                 <div
                     className={`${sfMono.className} flex justify-center items-center gap-4 cursor-pointer text-sm`}
                     onClick={() => {
@@ -66,11 +67,12 @@ export default function TalkSign() {
                 </div>
             </div>
 
-            <div className="flex flex-1 flex-col gap-2">
+            <div className="flex flex-col px-4 pb-28 gap-2">
+                {/* Khung ảnh chính */}
                 <motion.div
-                    className="h-56 bg-white/30 rounded-xl border-gray-200 border-1 relative overflow-hidden flex items-center justify-center"
+                    className="relative w-full aspect-[12/6] bg-white/30 rounded-xl border border-gray-200 overflow-hidden"
                     style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                         backdropFilter: "blur(4px)",
                     }}
                     initial={{ opacity: 0, y: 20 }}
@@ -85,21 +87,17 @@ export default function TalkSign() {
                 </motion.div>
 
                 <motion.div
-                    className="h-fit bg-white/30 rounded-xl border-gray-200 border-1 px-4 flex flex-col mt-2"
-                    style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                        backdropFilter: "blur(4px)",
-                    }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
+                    transition={{ delay: 0.4 }}
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col w-full text-sm mt-3`}>
-                        An AI-powered web platform translating sign language into text and speech, built for the Naver AI Hackathon 2025 Final Round. Focused on accessible user experience, low-latency interaction, and streamlined camera recognition flows.
-                    </p>
-                    <p className="text-sm my-3">
-                        <span className={`${sfProDisplayMedium.className}`}>Tech stack & Tools: </span>
-                        <span className={`${sfProDisplayLight.className}`}>React, Naver Cloud Platform, MediaPipe, Figma</span>
+                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
+                        <span className={`font-bold mb-1`}>TalkSign - Real-Time Sign Language Translator</span>
+                        An AI-powered assistive communication platform translating sign language gestures into text and
+                        speech in real time, built for the Naver AI Hackathon Final Round. Taking charge of product
+                        management and frontend engineering, I tackled low-latency camera recognition constraints and
+                        accessible interaction patterns, delivering a seamless two-way dialogue flow from initial
+                        concept to a functioning prototype.
                     </p>
                 </motion.div>
             </div>

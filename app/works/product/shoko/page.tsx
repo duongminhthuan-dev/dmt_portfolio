@@ -181,6 +181,132 @@ export default function Shoko() {
                     </p>
                 </motion.div>
 
+                <div className="flex flex-row gap-2">
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.2}}
+                    >
+                        <div className="aspect-[3/2] bg-white/30 rounded-xl"
+                             style={{
+                                 boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                 backdropFilter: "blur(4px)",
+                             }}
+                        >
+                            <CldImage
+                                src="shoko_10"
+                                alt="Shoko 3"
+                                fill
+                                className="object-cover rounded-xl"
+                            />
+                        </div>
+                    </motion.div>
+
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.3}}
+                    >
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
+                             style={{
+                                 boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                 backdropFilter: "blur(4px)",
+                             }}
+                        >
+                            <CldImage
+                                src="shoko_7"
+                                alt="Shoko 4"
+                                fill
+                                className="object-cover rounded-xl"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
+
+                <motion.div
+                    initial={{opacity:0, y:20}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay: 0.4}}
+                >
+                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
+                        <span className={`font-bold mb-1`}>Instant Multi-Book Scanning.</span>
+                        Instead of scanning barcodes one by one, the system detects multiple RFID books at once.
+                        The screen gives immediate feedback, clearly showing valid, overdue, or restricted items.
+                    </p>
+                </motion.div>
+
+
+                <div className="flex flex-row gap-2">
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.2}}
+                    >
+                        <div className="aspect-[3/2] bg-white/30 rounded-xl"
+                             style={{
+                                 boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                 backdropFilter: "blur(4px)",
+                             }}
+                        >
+                            <CldImage
+                                src="shoko_11"
+                                alt="Shoko 3"
+                                fill
+                                className="object-cover rounded-xl"
+                            />
+                        </div>
+                    </motion.div>
+
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.3}}
+                    >
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
+                             style={{
+                                 boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                 backdropFilter: "blur(4px)",
+                             }}
+                        >
+                            <CldImage
+                                src="shoko_12"
+                                alt="Shoko 4"
+                                fill
+                                className="object-cover rounded-xl"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
+
+                <motion.div
+                    className="relative w-full aspect-[12/3] bg-white/30 rounded-xl border border-gray-200 overflow-hidden"
+                    style={{
+                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+                        backdropFilter: "blur(4px)",
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                >
+                    <CldImage
+                        src="shoko_2"
+                        alt="Shoko 2"
+                        fill
+                        className="object-cover"
+                    />
+                </motion.div>
+
+                <motion.div
+                    initial={{opacity:0, y:20}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay: 0.4}}
+                >
+                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
+                        <span className={`font-bold mb-1`}>Fast, Zero-Training Flow.</span>
+                        Simple enough for anyone to use without instructions: identify account, place books on
+                        the plate, and confirm. The entire checkout takes less than 1 minutes for new-comers.
+                    </p>
+                </motion.div>
+
                 {/* Tạm ẩn Gallery Button
                 <motion.div
                     className="flex-1 rounded-xl flex items-start justify-center"
