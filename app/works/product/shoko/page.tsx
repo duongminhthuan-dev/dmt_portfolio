@@ -5,12 +5,6 @@ import {useRouter} from "next/navigation";
 import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
-// import Button from "../../../ui/gallerybutton";
-import ananas2 from "@/public/images/projects/ananas/overview2.webp";
-import ananas3 from "@/public/images/projects/ananas/overview3.webp";
-import ananas4 from "@/public/images/projects/ananas/overview4.png";
-
-import Image from "next/image";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 import { CldImage } from "next-cloudinary";
@@ -55,33 +49,31 @@ export default function Shoko() {
     return (
         <div className="h-screen overflow-y-auto scrollbar-hide overscroll-none">
             {/* Sticky Header */}
-            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] p-4 flex flex-row w-full justify-center items-center">
-                <div
-                    className={`${sfMono.className} flex justify-center items-center gap-4 cursor-pointer text-sm`}
-                    onClick={() => {
-                        myRouter.back();
-                    }}
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" fill="none">
-                        <path d="M28 6L1 6M1 6L6.14412 11M1 6L6.14412 1" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <p>BACK</p>
-                </div>
+            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] p-4 md:px-8 md:py-6">
+                <div className="flex flex-row w-full justify-between items-center max-w-5xl lg:max-w-6xl mx-auto">
+                    <div
+                        className={`${sfMono.className} flex justify-center items-center gap-3 md:gap-4 cursor-pointer text-sm md:text-base select-none transition-transform hover:-translate-x-1 duration-150`}
+                        onClick={() => {
+                            myRouter.back();
+                        }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" fill="none">
+                            <path d="M28 6L1 6M1 6L6.14412 11M1 6L6.14412 1" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <p>BACK</p>
+                    </div>
 
-                <div className={`${sfProDisplayLight.className} flex text-sm flex-col items-end w-full`}>
-                    <p>
-                        Product & Design
-                    </p>
-                    <p className={`${appleGaramond.className} text-3xl -mt-2 text-[#BA0000]`}>
-                        Shoko
-                    </p>
+                    <div className={`${sfProDisplayLight.className} flex text-sm md:text-base flex-col items-end md:items-start text-right md:text-left`}>
+                        <p>Product & Design</p>
+                        <p className={`${appleGaramond.className} text-3xl md:text-5xl -mt-2 md:-mt-3 text-[#BA0000]`}>Shoko</p>
+                    </div>
                 </div>
             </div>
 
-            <div className="flex flex-col px-4 pb-28 gap-2">
-                {/* Khung ảnh chính: tùy chỉnh tỷ lệ aspect-[...] tại đây, ảnh sẽ tự fill kín 100% khung */}
+            <div className="flex flex-col px-4 md:px-8 pb-28 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
+                {/* Khung ảnh chính */}
                 <motion.div
-                    className="relative w-full aspect-[12/5] bg-white/30 rounded-xl border border-gray-200 overflow-hidden"
+                    className="relative w-full aspect-[12/5] md:aspect-[16/7] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                     style={{
                         boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                         backdropFilter: "blur(4px)",
@@ -101,17 +93,20 @@ export default function Shoko() {
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
                     transition={{delay: 0.4}}
+                    className="w-full text-left"
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
-                        <span className={`font-bold mb-1`}>Shoko - Self-Service Library Kiosk</span>
-                        A self-service kiosk system designed to modernize library workflows. Taking full ownership,
-                        I researched patron behavior in public to shape the product, tackled physical-digital
-                        constraints, and delivered both the hardware setup and touch UI from initial idea to working reality.
-                    </p>
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">Shoko - Self-Service Library Kiosk</span>
+                        <p className="text-left w-full">
+                            A self-service kiosk system designed to modernize library workflows. Taking full ownership,
+                            I researched patron behavior in public to shape the product, tackled physical-digital
+                            constraints, and delivered both the hardware setup and touch UI from initial idea to working reality.
+                        </p>
+                    </div>
                 </motion.div>
 
                 <motion.div
-                    className="relative w-full aspect-[12/3] bg-white/30 rounded-xl border border-gray-200 overflow-hidden"
+                    className="relative w-full aspect-[12/3] md:aspect-[16/5] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                     style={{
                         boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                         backdropFilter: "blur(4px)",
@@ -127,13 +122,13 @@ export default function Shoko() {
                     />
                 </motion.div>
 
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row gap-2 md:gap-4">
                     <motion.div className="flex-1"
                                 initial={{opacity:0, y:20}}
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.2}}
                     >
-                        <div className="aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -143,7 +138,7 @@ export default function Shoko() {
                                 src="shoko_6"
                                 alt="Shoko 3"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
@@ -153,7 +148,7 @@ export default function Shoko() {
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.3}}
                     >
-                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -163,7 +158,7 @@ export default function Shoko() {
                                 src="shoko_8"
                                 alt="Shoko 4"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
@@ -173,21 +168,24 @@ export default function Shoko() {
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
                     transition={{delay: 0.4}}
+                    className="w-full text-left"
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
-                        <span className={`font-bold mb-1`}>Built for easy public use.</span> Features centered
-                        controls for both left- and right-handed readers, paired with oversized touch targets and
-                        high-contrast text optimized for varying lighting and viewing angles.
-                    </p>
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">Built for easy public use.</span>
+                        <p className="text-left w-full">
+                            Features centered controls for both left- and right-handed readers, paired with oversized touch targets and
+                            high-contrast text optimized for varying lighting and viewing angles.
+                        </p>
+                    </div>
                 </motion.div>
 
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row gap-2 md:gap-4">
                     <motion.div className="flex-1"
                                 initial={{opacity:0, y:20}}
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.2}}
                     >
-                        <div className="aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -197,7 +195,7 @@ export default function Shoko() {
                                 src="shoko_10"
                                 alt="Shoko 3"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
@@ -207,7 +205,7 @@ export default function Shoko() {
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.3}}
                     >
-                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -217,7 +215,7 @@ export default function Shoko() {
                                 src="shoko_7"
                                 alt="Shoko 4"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
@@ -227,22 +225,24 @@ export default function Shoko() {
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
                     transition={{delay: 0.4}}
+                    className="w-full text-left"
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
-                        <span className={`font-bold mb-1`}>Instant Multi-Book Scanning.</span>
-                        Instead of scanning barcodes one by one, the system detects multiple RFID books at once.
-                        The screen gives immediate feedback, clearly showing valid, overdue, or restricted items.
-                    </p>
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">Instant Multi-Book Scanning.</span>
+                        <p className="text-left w-full">
+                            Instead of scanning barcodes one by one, the system detects multiple RFID books at once.
+                            The screen gives immediate feedback, clearly showing valid, overdue, or restricted items.
+                        </p>
+                    </div>
                 </motion.div>
 
-
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row gap-2 md:gap-4">
                     <motion.div className="flex-1"
                                 initial={{opacity:0, y:20}}
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.2}}
                     >
-                        <div className="aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -252,7 +252,7 @@ export default function Shoko() {
                                 src="shoko_11"
                                 alt="Shoko 3"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
@@ -262,7 +262,7 @@ export default function Shoko() {
                                 animate={{opacity:1, y:0}}
                                 transition={{delay: 0.3}}
                     >
-                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
@@ -272,14 +272,14 @@ export default function Shoko() {
                                 src="shoko_12"
                                 alt="Shoko 4"
                                 fill
-                                className="object-cover rounded-xl"
+                                className="object-cover"
                             />
                         </div>
                     </motion.div>
                 </div>
 
                 <motion.div
-                    className="relative w-full aspect-[12/3] bg-white/30 rounded-xl border border-gray-200 overflow-hidden"
+                    className="relative w-full aspect-[12/3] md:aspect-[16/5] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                     style={{
                         boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                         backdropFilter: "blur(4px)",
@@ -299,28 +299,16 @@ export default function Shoko() {
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
                     transition={{delay: 0.4}}
+                    className="w-full text-left"
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm my-3`}>
-                        <span className={`font-bold mb-1`}>Fast, Zero-Training Flow.</span>
-                        Simple enough for anyone to use without instructions: identify account, place books on
-                        the plate, and confirm. The entire checkout takes less than 1 minutes for new-comers.
-                    </p>
-                </motion.div>
-
-                {/* Tạm ẩn Gallery Button
-                <motion.div
-                    className="flex-1 rounded-xl flex items-start justify-center"
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
-                    transition={{delay: 0.5}}
-                >
-                    <div onClick={() => {
-                        myRouter.push("/works/product/shoko/gallery");
-                    }}>
-                        <Button />
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">Fast, Zero-Training Flow.</span>
+                        <p className="text-left w-full">
+                            Simple enough for anyone to use without instructions: identify account, place books on
+                            the plate, and confirm. The entire checkout takes less than 1 minutes for new-comers.
+                        </p>
                     </div>
                 </motion.div>
-                */}
             </div>
         </div>
     )

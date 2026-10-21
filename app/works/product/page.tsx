@@ -33,35 +33,34 @@ function Product() {
     }, []);
 
     return (
-        <div className="h-screen flex flex-col">
+        <div className="h-screen flex flex-col justify-between">
             <div>
                 <motion.p
-                    className={`${appleGaramondItalic.className} text-4xl text-[#BA0000] mt-12 w-full text-center`}
+                    className={`${appleGaramondItalic.className} text-4xl md:text-5xl lg:text-6xl text-[#BA0000] mt-12 md:mt-16 w-full text-center`}
                 >
                     Product Management
                 </motion.p>
-            </div>
 
-
-            <div
-                className={`${sfMono.className} flex justify-center items-center gap-4 mt-3 cursor-pointer`}
-                onClick={() => {
-                    myRouter.back();
-                }}
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" fill="none">
-                    <path d="M28 6L1 6M1 6L6.14412 11M1 6L6.14412 1" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <p>BACK</p>
+                <div
+                    className={`${sfMono.className} flex justify-center items-center gap-3 md:gap-4 mt-3 md:mt-4 cursor-pointer text-sm md:text-base select-none transition-transform hover:-translate-x-1 duration-150`}
+                    onClick={() => {
+                        myRouter.back();
+                    }}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="12" viewBox="0 0 29 12" fill="none">
+                        <path d="M28 6L1 6M1 6L6.14412 11M1 6L6.14412 1" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <p>BACK</p>
+                </div>
             </div>
 
             <motion.div
-                className="my-auto -translate-y-20 flex justify-center items-center"
+                className="my-auto -translate-y-16 md:-translate-y-12 flex justify-center items-center"
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 0.5}}
             >
-                <div className="w-[280px] h-[400px] md:w-[320px] md:h-[450px]">
+                <div className="w-[280px] h-[400px] md:w-[350px] md:h-[480px] lg:w-[380px] lg:h-[520px]">
                     <Stack
                         randomRotation={true}
                         sensitivity={180}
@@ -69,6 +68,7 @@ function Product() {
                     />
                 </div>
             </motion.div>
+            <div className="h-10" />
         </div>
     )
 }

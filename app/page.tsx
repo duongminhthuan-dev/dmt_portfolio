@@ -25,9 +25,9 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex flex-col overflow-hidden scrollbar-hide overscroll-none">
+        <div className="w-screen h-screen flex flex-col overflow-hidden scrollbar-hide overscroll-none justify-center items-center">
             <motion.div
-                className={`antialiased h-screen w-full flex flex-col items-center justify-center overflow-hidden scrollbar-hide`}
+                className="antialiased h-screen w-full flex flex-col items-center justify-center overflow-hidden scrollbar-hide"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -35,13 +35,36 @@ export default function Home() {
                 key="home-page"
             >
                 <motion.div
-                    className={`${appleGaramond.className} flex flex-col items-center gap-6 h-full justify-center -translate-y-6`}
+                    className={`${appleGaramond.className} flex flex-col md:flex-row items-center justify-center md:justify-between max-w-6xl w-full h-full px-6 md:px-12 lg:px-16 gap-8 md:gap-12 -translate-y-6 md:translate-y-0`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
                 >
+                    {/* Text & Button Column */}
+                    <div className="flex flex-col items-center md:items-start order-2 md:order-1 text-center md:text-left gap-6 md:gap-8 max-w-xl">
+                        <div className="text-[28px] md:text-4xl lg:text-5xl leading-tight pb-3">
+                            <SplitText
+                                text="I am an interface designer, a web builder, a software developer, and sometimes a photographer."
+                                splitType="words"
+                                highlightWords={['designer', 'builder', 'developer', 'photographer']}
+                                delay={150}
+                                className="text-2xl md:text-4xl lg:text-5xl"
+                            />
+                        </div>
+                        <motion.div
+                            className="w-fit h-fit"
+                            initial={{ opacity: 0, transform: "translateY(20px)" }}
+                            animate={{ opacity: 1, transform: "translateY(0px)" }}
+                            exit={{opacity: 0, transform: "translateX(-60px)" }}
+                            transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
+                        >
+                            <Button />
+                        </motion.div>
+                    </div>
+
+                    {/* Image Column */}
                     <motion.div
-                        className="relative w-[190px] aspect-[2/3] -rotate-[5deg]"
+                        className="relative w-[190px] md:w-[300px] lg:w-[360px] aspect-[2/3] -rotate-[5deg] order-1 md:order-2 flex-shrink-0"
                         initial={{ opacity: 0, transform: "translateY(20px)" }}
                         animate={{ opacity: 1, transform: "translateY(0px)" }}
                         transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
@@ -54,28 +77,9 @@ export default function Home() {
                             style={{boxShadow: "0 3px 6px 0 rgba(0, 0, 0, 0.25), 0 4px 15px 0 rgba(0, 0, 0, 0.25)"}}
                             priority
                         />
-                        <div className="absolute rotate-5 h-5 top-36 -left-2 aspect-square bg-[#BA0000] z-10"/>
-                        <div className="absolute rotate-5 h-5 -bottom-2 -right-2 aspect-square bg-[#BA0000] z-10"/>
-                        <div className="absolute rotate-5 h-5 top-10 -right-6 aspect-[3/1] bg-[#BA0000] z-10"/>
-                    </motion.div>
-
-                    <div className="text-[28px] text-center mx-6 -mb-4">
-                        <SplitText
-                            text="I am an interface designer, a web builder, a software developer, and sometimes a photographer."
-                            splitType="words"
-                            highlightWords={['designer', 'builder', 'developer', 'photographer']}
-                            delay={150}
-                            className="text-2xl"
-                        />
-                    </div>
-                    <motion.div
-                        className="w-fit h-fit"
-                        initial={{ opacity: 0, transform: "translateY(20px)" }}
-                        animate={{ opacity: 1, transform: "translateY(0px)" }}
-                        exit={{opacity: 0, transform: "translateX(-60px)" }}
-                        transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
-                    >
-                        <Button />
+                        <div className="absolute rotate-5 h-5 md:h-7 top-36 md:top-56 -left-2 md:-left-3 aspect-square bg-[#BA0000] z-10"/>
+                        <div className="absolute rotate-5 h-5 md:h-7 -bottom-2 md:-bottom-3 -right-2 md:-right-3 aspect-square bg-[#BA0000] z-10"/>
+                        <div className="absolute rotate-5 h-5 md:h-7 top-10 md:top-14 -right-6 md:-right-8 aspect-[3/1] bg-[#BA0000] z-10"/>
                     </motion.div>
                 </motion.div>
             </motion.div>

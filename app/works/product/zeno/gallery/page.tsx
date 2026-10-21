@@ -29,7 +29,6 @@ const items = [
     },
 ];
 
-
 const sfMono = SFMono({
     weight: "400",
     src: "../../../../../public/fonts/SFMono-Regular.otf",
@@ -48,7 +47,6 @@ const sfProDisplayLight = SFProDisplayLight({
     variable: "--SFProDisplayLight",
 })
 
-
 const sfProDisplayMedium = SFProDisplayMedium({
     weight:"600",
     src: "../../../../../public/fonts/SFProDisplay-Medium.otf",
@@ -59,10 +57,10 @@ export default function ZenoGallery(){
     const myRouter = useRouter();
 
     return (
-        <div className="flex flex-col p-4">
-                        <div className="flex flex-row w-full justify-center items-center">
+        <div className="flex flex-col p-4 md:px-8 md:py-6 max-w-6xl mx-auto w-full">
+            <div className="flex flex-row w-full justify-between items-center">
                 <div
-                    className={`${sfMono.className} flex justify-center items-center gap-4 cursor-pointer text-sm`}
+                    className={`${sfMono.className} flex justify-center items-center gap-3 md:gap-4 cursor-pointer text-sm md:text-base select-none transition-transform hover:-translate-x-1 duration-150`}
                     onClick={() => {
                         myRouter.back();
                     }}
@@ -73,16 +71,16 @@ export default function ZenoGallery(){
                     <p>BACK</p>
                 </div>
 
-                <div className={`${sfProDisplayLight.className} flex text-sm flex-col items-end w-full`}>
+                <div className={`${sfProDisplayLight.className} flex text-sm md:text-base flex-col items-end`}>
                     <p>
                         Mobile Software
                     </p>
-                    <p className={`${appleGaramond.className} text-3xl -mt-2 text-[#BA0000]`}>
+                    <p className={`${appleGaramond.className} text-3xl md:text-5xl -mt-2 md:-mt-3 text-[#BA0000]`}>
                         zeno
                     </p>
                 </div>
             </div>
-            <div className="mt-4">
+            <div className="mt-6">
                 <Masonry
                     items={items}
                     ease="power3.out"

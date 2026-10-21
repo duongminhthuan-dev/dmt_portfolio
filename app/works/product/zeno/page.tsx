@@ -5,7 +5,6 @@ import {useRouter} from "next/navigation";
 import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
-// import Button from "../../../ui/gallerybutton"
 import ananas1 from "@/public/images/projects/ananas/overview1.png";
 import ananas2 from "@/public/images/projects/ananas/overview2.webp";
 import ananas3 from "@/public/images/projects/ananas/overview3.webp";
@@ -33,7 +32,6 @@ const sfProDisplayLight = SFProDisplayLight({
     variable: "--SFProDisplayLight",
 })
 
-
 const sfProDisplayMedium = SFProDisplayMedium({
     weight:"600",
     src: "../../../../public/fonts/SFProDisplay-Medium.otf",
@@ -54,11 +52,12 @@ export default function Ananas() {
     }, []);
     
     return (
-        <div className="h-screen overflow-hidden">
-            <div className="flex flex-col h-full p-4 gap-2 scrollbar-hide overscroll-none">
-                <div className="flex flex-row w-full justify-center items-center">
+        <div className="h-screen overflow-y-auto scrollbar-hide overscroll-none">
+            {/* Sticky Header */}
+            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] p-4 md:px-8 md:py-6">
+                <div className="flex flex-row w-full justify-between items-center max-w-5xl lg:max-w-6xl mx-auto">
                     <div
-                        className={`${sfMono.className} flex justify-center items-center gap-4 cursor-pointer text-sm`}
+                        className={`${sfMono.className} flex justify-center items-center gap-3 md:gap-4 cursor-pointer text-sm md:text-base select-none transition-transform hover:-translate-x-1 duration-150`}
                         onClick={() => {
                             myRouter.back();
                         }}
@@ -69,133 +68,114 @@ export default function Ananas() {
                         <p>BACK</p>
                     </div>
 
-                    <div className={`${sfProDisplayLight.className} flex text-sm flex-col items-end w-full`}>
-                        <p>
-                            Mobile Software
-                        </p>
-                        <p className={`${appleGaramond.className} text-3xl -mt-2 text-[#BA0000]`}>
+                    <div className={`${sfProDisplayLight.className} flex text-sm md:text-base flex-col items-end md:items-start text-right md:text-left`}>
+                        <p>Mobile Software</p>
+                        <p className={`${appleGaramond.className} text-3xl md:text-5xl -mt-2 md:-mt-3 text-[#BA0000]`}>
                             zeno
                         </p>
                     </div>
                 </div>
+            </div>
 
-                <div className="flex flex-col gap-2">
-                    <motion.div
-                        className="bg-white/30 rounded-xl border border-gray-200"
-                        style={{
-                            boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                            backdropFilter: "blur(4px)",
-                        }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <div className="relative w-10/12 mx-auto aspect-[12/4]">
-
-                            <div className="relative h-[85%]">
-                                <Image
-                                    src={ananas1}
-                                    alt="Ananas 1"
-                                    fill
-                                    className="object-cover object-bottom"
-                                />
-                            </div>
-
+            <div className="flex flex-col px-4 md:px-8 pb-28 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
+                <motion.div
+                    className="bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
+                    style={{
+                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+                        backdropFilter: "blur(4px)",
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                >
+                    <div className="relative w-10/12 mx-auto aspect-[12/4] md:aspect-[16/5]">
+                        <div className="relative h-[85%] md:h-[90%]">
+                            <Image
+                                src={ananas1}
+                                alt="Ananas 1"
+                                fill
+                                className="object-cover object-bottom"
+                            />
                         </div>
-                    </motion.div>
+                    </div>
+                </motion.div>
 
-                    <motion.div
-                        className="flex-1"
-                        initial={{opacity:0, y:20}}
-                        animate={{opacity:1, y:0}}
-                        transition={{delay: 0.1}}
+                <motion.div
+                    className="flex-1"
+                    initial={{opacity:0, y:20}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay: 0.1}}
+                >
+                    <div className="aspect-[5/2] md:aspect-[16/6] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex overflow-hidden"
+                         style={{
+                             boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                             backdropFilter: "blur(4px)",
+                         }}
                     >
-                        <div className="aspect-[5/2] bg-white/30 rounded-xl border-gray-200 border-1 flex"
+                        <Image src={ananas2} alt="Ananas 2" className="object-cover scale-95 mx-auto" />
+                    </div>
+                </motion.div>
+
+                <div className="flex flex-row gap-2 md:gap-4">
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.2}}
+                    >
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                              style={{
                                  boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                                  backdropFilter: "blur(4px)",
                              }}
                         >
-                            <Image src={ananas2} alt="Ananas 2" className="object-cover scale-95 mx-auto" />
+                            <Image
+                                src={ananas3}
+                                alt=""
+                                fill
+                                className="object-contain p-2 md:p-4"
+                            />
                         </div>
                     </motion.div>
 
-                    <div className="flex flex-row gap-2">
-                        <motion.div className="flex-1"
-                                    initial={{opacity:0, y:20}}
-                                    animate={{opacity:1, y:0}}
-                                    transition={{delay: 0.2}}
-                        >
-                            <div className="aspect-[3/2] bg-white/30 rounded-xl"
-                                 style={{
-                                     boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                                     backdropFilter: "blur(4px)",
-                                 }}
-                            >
-                                <Image
-                                    src={ananas3}
-                                    alt=""
-                                    fill
-                                    className="object-contain p-2"
-                                />
-                            </div>
-                        </motion.div>
-
-                        <motion.div className="flex-1"
-                                    initial={{opacity:0, y:20}}
-                                    animate={{opacity:1, y:0}}
-                                    transition={{delay: 0.3}}
-                        >
-                            <div className="relative aspect-[3/2] bg-white/30 rounded-xl"
-                                 style={{
-                                     boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                                     backdropFilter: "blur(4px)",
-                                 }}
-                            >
-                                <Image
-                                    src={ananas4}
-                                    alt=""
-                                    fill
-                                    className="object-contain p-2"
-                                />
-                            </div>
-                        </motion.div>
-
-                    </div>
-
-                    <motion.div
-                        className="h-fit bg-white/30 rounded-xl border-gray-200 border-1 px-4 flex flex-col"
-                        style={{
-                            boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                            backdropFilter: "blur(4px)",
-                        }}
-                        initial={{opacity:0, y:20}}
-                        animate={{opacity:1, y:0}}
-                        transition={{delay: 0.4}}
+                    <motion.div className="flex-1"
+                                initial={{opacity:0, y:20}}
+                                animate={{opacity:1, y:0}}
+                                transition={{delay: 0.3}}
                     >
-                        <p className={`${sfProDisplayLight.className} flex flex-col items-end w-full text-sm mt-3`}>
-                            A React Native app connecting to an ESP32-based  smart watch, built for my Logic Design
-                            Project course. I handled  the entire app development, from UI/UX design to coding.
-                        </p>
-                        <p className=" text-sm mb-3">
-                            <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span><span className={`${sfProDisplayLight.className}`}>React Native, Firebase, Figma</span>
-                        </p>
-                    </motion.div>
-
-                    {/* Tạm ẩn Gallery Button
-                    <motion.div
-                        className="flex-1 rounded-xl flex items-start justify-center"
-                        initial={{opacity:0, y:20}}
-                        animate={{opacity:1, y:0}}
-                        transition={{delay: 0.5}}
-                    >
-                        <div onClick={() => {
-                            myRouter.push("/works/softwareengineering/zeno/gallery");
-                        }}>
-                            <Button />
+                        <div className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
+                             style={{
+                                 boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                 backdropFilter: "blur(4px)",
+                             }}
+                        >
+                            <Image
+                                src={ananas4}
+                                alt=""
+                                fill
+                                className="object-contain p-2 md:p-4"
+                            />
                         </div>
                     </motion.div>
-                    */}
                 </div>
+
+                <motion.div
+                    className="h-fit bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border px-4 md:px-6 py-2 md:py-4 flex flex-col text-left"
+                    style={{
+                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                        backdropFilter: "blur(4px)",
+                    }}
+                    initial={{opacity:0, y:20}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay: 0.4}}
+                >
+                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base mt-3 leading-relaxed text-left`}>
+                        A React Native app connecting to an ESP32-based smart watch, built for my Logic Design
+                        Project course. I handled the entire app development, from UI/UX design to coding.
+                    </p>
+                    <p className="text-sm md:text-base my-3 text-left">
+                        <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
+                        <span className={`${sfProDisplayLight.className}`}>React Native, Firebase, Figma</span>
+                    </p>
+                </motion.div>
             </div>
         </div>
     )

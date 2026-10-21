@@ -138,7 +138,7 @@ function AboutMeTimeLine() {
                 className="overflow-x-scroll w-full flex flex-row touch-pan-x scrollbar-hide select-none pt-2 pb-3"
             >
                 <div
-                    className="relative shrink-0"
+                    className={`relative shrink-0`}
                     style={{ width: `${TOTAL_TRACK_WIDTH}px`, height: '175px' }}
                 >
                     {/* --- GDSC TRACK (PILL + LINE CENTERED) --- */}
@@ -162,7 +162,7 @@ function AboutMeTimeLine() {
                                 backdropFilter: 'blur(4px)',
                             }}
                         >
-                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444] truncate pr-3`}>
+                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-base text-[#444444] truncate pr-3`}>
                                 GDSC HCMUT - Marketing Lead & Organizer
                             </p>
                         </div>
@@ -204,7 +204,7 @@ function AboutMeTimeLine() {
                                 backdropFilter: 'blur(4px)',
                             }}
                         >
-                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444]`}>
+                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-base text-[#444444]`}>
                                 GAM Esports - Video Editor
                             </p>
                         </div>
@@ -246,7 +246,7 @@ function AboutMeTimeLine() {
                                 backdropFilter: 'blur(4px)',
                             }}
                         >
-                            <p className={`${sfProDisplayMedium.className} text-sm text-[#444444] truncate pr-3`}>
+                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-base text-[#444444] truncate pr-3`}>
                                 ShopBack - Software Engineer
                             </p>
                         </div>
@@ -360,7 +360,7 @@ function AboutMeTimeLine() {
             </div>
 
             {/* Pill-shaped pagination indicators */}
-            <div className="flex justify-center items-center mt-4 space-x-2">
+            <div className="flex justify-center items-center mt-4 space-x-2 md:hidden">
                 {Array.from({ length: totalDots }, (_, index) => (
                     <button
                         key={index}
@@ -387,16 +387,17 @@ function AboutMeTimeLine() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="w-full flex justify-center items-center"
                         >
                             {/* GDSC Details */}
                             {active === "gdsc" && (
-                                <div>
+                                <div className="flex flex-col md:flex-row w-full lg:w-11/12 xl:w-9/12 max-w-5xl mx-auto justify-center items-center md:items-stretch gap-3 md:gap-4 px-4 md:px-0">
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.1 }}
-                                        className="mx-6 mt-5 mb-3 p-5 rounded-xl flex flex-row justify-center items-center"
+                                        className="w-full md:w-5/12 md:shrink-0 mt-5 md:mt-0 p-5 rounded-xl flex flex-row justify-center items-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -405,11 +406,11 @@ function AboutMeTimeLine() {
                                         }}
                                     >
                                         <div>
-                                            <p className={`${sfProDisplayMedium.className} text-sm`}>GDSC HCMUT</p>
-                                            <p className={`${sfProDisplayLight.className} text-sm`}>Marketing Lead & Organizer</p>
+                                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-xl`}>GDSC HCMUT</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm `}>Marketing Lead & Organizer</p>
                                         </div>
-                                        <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 w-28 rounded-full text-xs`}>
+                                        <div className="flex-1 min-w-4"></div>
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 w-28 rounded-full text-xs text-center`}>
                                             Oct &#39;22 - Jun &#39;24
                                         </div>
                                         <button
@@ -427,7 +428,7 @@ function AboutMeTimeLine() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.2 }}
-                                        className="relative mx-6 p-3 mb-14 rounded-xl"
+                                        className="relative w-full md:flex-1 p-4 mb-14 md:mb-0 rounded-xl flex flex-col justify-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -435,10 +436,10 @@ function AboutMeTimeLine() {
                                             backdropFilter: 'blur(2px)',
                                         }}
                                     >
-                                        <div className="mb-3">
-                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Led a 4-member team to deliver 3 major campaigns, including Info Seminar 2024 (largest annual event).</p>
-                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Developed marketing plans to boost student engagement and support media-related activities.</p>
-                                            <p className={`${sfProDisplayLight.className} text-sm mt-1`}>- Supported team in marketing-related tasks.</p>
+                                        <div className="text-sm lg:text-base">
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Led a 4-member team to deliver 3 major campaigns, including Info Seminar 2024 (largest annual event).</p>
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Developed marketing plans to boost student engagement and support media-related activities.</p>
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Supported team in marketing-related tasks.</p>
                                         </div>
                                     </motion.div>
                                 </div>
@@ -446,13 +447,13 @@ function AboutMeTimeLine() {
 
                             {/* GAM Details */}
                             {active === "gam" && (
-                                <div>
+                                <div className="flex flex-col md:flex-row w-full lg:w-11/12 xl:w-9/12 max-w-5xl mx-auto justify-center items-center md:items-stretch gap-3 md:gap-4 px-4 md:px-0">
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.1 }}
-                                        className="mx-6 mt-5 mb-3 p-4 rounded-xl flex flex-row justify-center items-center"
+                                        className="w-full md:w-5/12 md:shrink-0 mt-5 md:mt-0 p-5 rounded-xl flex flex-row justify-center items-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -461,11 +462,11 @@ function AboutMeTimeLine() {
                                         }}
                                     >
                                         <div>
-                                            <p className={`${sfProDisplayMedium.className} text-sm`}>GAM Esports</p>
-                                            <p className={`${sfProDisplayLight.className} text-sm`}>Video Editor</p>
+                                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-xl`}>GAM Esports</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm `}>Video Editor</p>
                                         </div>
-                                        <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-xs`}>
+                                        <div className="flex-1 min-w-4"></div>
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 w-28 rounded-full text-xs text-center`}>
                                             Jan &#39;24 - Sep &#39;24
                                         </div>
                                         <button
@@ -483,7 +484,7 @@ function AboutMeTimeLine() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.2 }}
-                                        className="relative mx-6 p-4 mb-14 rounded-xl"
+                                        className="relative w-full md:flex-1 p-4 mb-14 md:mb-0 rounded-xl flex flex-col justify-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -491,21 +492,23 @@ function AboutMeTimeLine() {
                                             backdropFilter: 'blur(2px)',
                                         }}
                                     >
-                                        <p className={`${sfProDisplayLight.className} text-sm`}>- Produced and edited videos and promo content for one of the top Vietnam E-sports teams.</p>
-                                        <p className={`${sfProDisplayLight.className} mt-2 text-sm`}>- Collaborated with designers, players, and managers to deliver results under tight deadlines.</p>
+                                        <div className="text-sm lg:text-base">
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Produced and edited videos and promo content for one of the top Vietnam E-sports teams.</p>
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Collaborated with designers, players, and managers to deliver results under tight deadlines.</p>
+                                        </div>
                                     </motion.div>
                                 </div>
                             )}
 
                             {/* ShopBack Details */}
                             {active === "shopback" && (
-                                <div>
+                                <div className="flex flex-col md:flex-row w-full lg:w-11/12 xl:w-9/12 max-w-5xl mx-auto justify-center items-center md:items-stretch gap-3 md:gap-4 px-4 md:px-0">
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.1 }}
-                                        className="mx-6 mt-5 mb-3 p-4 rounded-xl flex flex-row justify-center items-center"
+                                        className="w-full md:w-5/12 md:shrink-0 mt-5 md:mt-0 p-5 rounded-xl flex flex-row justify-center items-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -514,11 +517,11 @@ function AboutMeTimeLine() {
                                         }}
                                     >
                                         <div>
-                                            <p className={`${sfProDisplayMedium.className} text-sm`}>ShopBack</p>
-                                            <p className={`${sfProDisplayLight.className} text-sm`}>Software Engineer</p>
+                                            <p className={`${sfProDisplayMedium.className} text-sm lg:text-xl`}>ShopBack</p>
+                                            <p className={`${sfProDisplayLight.className} text-sm `}>Software Engineer</p>
                                         </div>
-                                        <div className="flex-1"></div>
-                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 rounded-full text-xs`}>
+                                        <div className="flex-1 min-w-4"></div>
+                                        <div className={`${sfProDisplayLight.className} bg-gray-300 px-2 py-1 mr-4 w-28 rounded-full text-xs text-center`}>
                                             Feb &#39;26 - Sep &#39;26
                                         </div>
                                         <button
@@ -536,7 +539,7 @@ function AboutMeTimeLine() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.3, delay: 0.2 }}
-                                        className="relative mx-6 p-4 mb-14 rounded-xl"
+                                        className="relative w-full md:flex-1 p-4 mb-14 md:mb-0 rounded-xl flex flex-col justify-center"
                                         style={{
                                             border: '1px solid #F1F1F1',
                                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)',
@@ -544,8 +547,10 @@ function AboutMeTimeLine() {
                                             backdropFilter: 'blur(2px)',
                                         }}
                                     >
-                                        <p className={`${sfProDisplayLight.className} text-sm`}>- Contributed to core web & mobile product features, improving user experience and performance.</p>
-                                        <p className={`${sfProDisplayLight.className} mt-2 text-sm`}>- Collaborated with regional product and engineering teams in an Agile development environment.</p>
+                                        <div className="text-sm lg:text-base">
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Contributed to core web & mobile product features, improving user experience and performance.</p>
+                                            <p className={`${sfProDisplayLight.className} mt-1`}>- Collaborated with regional product and engineering teams in an Agile development environment.</p>
+                                        </div>
                                     </motion.div>
                                 </div>
                             )}

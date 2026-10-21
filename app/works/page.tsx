@@ -33,7 +33,7 @@ function Works() {
     return (
         <div className="w-screen h-screen flex flex-col overflow-hidden scrollbar-hide overscroll-none">
             <motion.p
-                className={`absolute ${appleGaramondItalic.className} text-5xl text-[#BA0000] top-1/12 left-1/2 -translate-x-1/2`}
+                className={`absolute ${appleGaramondItalic.className} text-5xl md:text-7xl lg:text-8xl text-[#BA0000] top-1/12 md:top-16 left-1/2 -translate-x-1/2`}
             >
                 Works
             </motion.p>
@@ -41,8 +41,8 @@ function Works() {
             <WorksCards
                 icon={MobileAppIcon}
                 title={"Product Management"}
-                className="absolute left-1/2 -translate-x-[180px] -translate-y-5"
-                flipClassName="absolute -translate-x-1/2 -translate-y-10  left-1/2"
+                className="absolute left-1/2 -translate-x-[180px] md:-translate-x-[240px] lg:-translate-x-[270px] -translate-y-5 md:-translate-y-8 md:scale-110 lg:scale-120"
+                flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 md:scale-110 lg:scale-120"
                 rotate={4}
                 isDimmed={activeIdx !== null && activeIdx !== 0}
                 onToggle={() =>
@@ -57,8 +57,8 @@ function Works() {
             <WorksCards
                 icon={WebDevIcon}
                 title={"Software Engineering"}
-                className="absolute left-1/2 -translate-x-[90px] -translate-y-12 z-10"
-                flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-30"
+                className="absolute left-1/2 -translate-x-[90px] md:-translate-x-[120px] lg:-translate-x-[135px] -translate-y-12 md:-translate-y-16 z-10 md:scale-110 lg:scale-120"
+                flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-30 md:scale-110 lg:scale-120"
                 rotate={0}
                 isDimmed={activeIdx !== null && activeIdx !== 1}
                 onToggle={() =>
@@ -73,8 +73,8 @@ function Works() {
             <WorksCards
                 icon={MultimediaIcon}
                 title={"Media Producer"}
-                className="absolute left-1/2 -translate-x-[10px]"
-                flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-20"
+                className="absolute left-1/2 -translate-x-[10px] md:-translate-x-[10px] lg:-translate-x-[10px] md:scale-110 lg:scale-120"
+                flipClassName="absolute -translate-x-1/2 -translate-y-10 left-1/2 z-20 md:scale-110 lg:scale-120"
                 rotate={-10}
                 isDimmed={activeIdx !== null && activeIdx !== 2}
                 onToggle={() =>

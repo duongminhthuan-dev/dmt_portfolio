@@ -41,7 +41,7 @@ const SplitText: React.FC<SplitTextProps> = ({
                                                  to = { opacity: 1, y: 0 },
                                                  threshold = 0.1,
                                                  rootMargin = "-100px",
-                                                 textAlign = "center",
+                                                 textAlign = "inherit",
                                                  onLetterAnimationComplete,
                                                  highlightWords = [],
                                                  caseSensitive = false,
@@ -217,7 +217,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     return (
         <p
             ref={ref}
-            className={`split-parent overflow-hidden inline-block whitespace-normal ${className}`}
+            className={`split-parent overflow-visible inline-block whitespace-normal ${className}`}
             style={{
                 textAlign,
                 wordWrap: "break-word",

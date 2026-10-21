@@ -1,12 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
-import {useId, useMemo, useEffect} from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { useId, useMemo, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import SFMono from "next/font/local";
 
 import TransitionLink from "@/utils/transitionlink";
 import Image from "next/image";
-import OrbImage from "../../public/orb.png"
+import OrbImage from "../../public/orb.png";
+
+const sfMono = SFMono({
+    weight: "400",
+    src: "../../public/fonts/SFMono-Regular.otf",
+    variable: "--SFMono-Regular",
+});
 
 export function HomeIcon() {
     return (
@@ -100,177 +107,57 @@ export function ContactIcon() {
     )
 }
 
-function Orb() {
-    const maskId = useId();
-
-    return(
-        <motion.span
-            layoutId="active-orb"
-            initial={false}
-            transition={{
-                type: "spring",
-                stiffness: 480,
-                damping: 28,
-                mass: 0.5,
-                // Thêm layout transition để tránh glitch
-                layout: { duration: 0.2 }
-            }}
-            className="absolute flex justify-center top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full"
-            // Force re-render khi animation kết thúc
-            onLayoutAnimationComplete={() => {
-                // Trigger re-render để đảm bảo SVG hiển thị đúng
-                const orbElement = document.querySelector('[data-orb-id]') as HTMLElement;
-                if (orbElement) {
-                    orbElement.style.transform += '';
-                }
-            }}
-            data-orb-id="main-orb"
-        >
-            <motion.div
-                className="pointer-events-none absolute inset-0 bg-black rounded-full"
-                // Thêm layout animation cho background
-                layout
-            />
-
-            {/* Phần sáng trên cùng - cải thiện stability */}
-            <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 mt-[1px]"
-                layout
-                // Đảm bảo SVG không bị mất khi animate
-                style={{
-                    willChange: 'transform',
-                    backfaceVisibility: 'hidden',
-                    perspective: 1000
-                }}
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="10"
-                    viewBox="0 0 28 10"
-                    fill="none"
-                    // Thêm key để force re-render
-                    key={`highlight-${maskId}`}
-                    style={{
-                        // Cải thiện rendering trên mobile
-                        shapeRendering: 'geometricPrecision',
-                        imageRendering: 'crisp-edges'
-                    }}
-                >
-                    <g filter="url(#filter0_i_634_494)">
-                        <path d="M14.3571 0.933289C8.54687 0.933289 3.47951 3.0903 1.39977 5.24732C-0.0422021 7.40433 1.07532 10.4977 5.24008 9.56135C9.07778 8.69854 19.2234 8.82149 22.5158 9.56135C26.3553 10.4242 28.4887 7.40433 26.3556 5.24732C24.2226 3.09031 20.1164 0.933289 14.3571 0.933289Z" fill="url(#paint0_linear_634_494)"/>
-                    </g>
-                    <defs>
-                        <filter id="filter0_i_634_494" x="0.800781" y="0.933289" width="26.4004" height="10.8" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                            <feOffset dy="2"/>
-                            <feGaussianBlur stdDeviation="2"/>
-                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-                            <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.32 0"/>
-                            <feBlend mode="normal" in2="shape" result="effect1_innerShadow_634_494"/>
-                        </filter>
-                        <linearGradient id="paint0_linear_634_494" x1="14.0008" y1="0.933289" x2="14.0008" y2="9.73329" gradientUnits="userSpaceOnUse">
-                            <stop stopColor="white" stopOpacity="0.52"/>
-                            <stop offset="1" stopColor="white" stopOpacity="0"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </motion.div>
-
-            {/* Inner shadow đen*/}
-            <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{ boxShadow: "0 0 8px 2px rgba(255,255,255,0.25) inset, 0 0 12px 0 rgba(255,255,255,0.08) inset" }}
-                layout
-            />
-
-            <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{ boxShadow: "0 5px 5px rgba(0, 0, 0, 0.25), 0 40px 35px rgba(0, 0, 0, 0.25), 0 13px 20px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.25)" }}
-                layout
-            />
-
-            {/* Mask pill - cải thiện stability */}
-            <motion.div
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                layout
-                style={{
-                    willChange: 'transform',
-                    backfaceVisibility: 'hidden'
-                }}
-            >
-                <svg
-                    className="w-full h-full"
-                    aria-hidden="true"
-                    // Unique key để tránh conflict
-                    key={`mask-${maskId}`}
-                >
-                    <defs>
-                        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
-                            <rect width="100%" height="100%" fill="black" />
-                            <ellipse cx="50%" cy="50%" rx="90%" ry="60" transform="translate(0,-50)" fill="#BA0000" opacity={0.9} />
-                        </mask>
-                    </defs>
-                    <rect x="0" y="0" width="100%" height="100%" rx="20" ry="50%" fill="#ffffff" opacity="60%" mask={`url(#${maskId})`} />
-                </svg>
-            </motion.div>
-        </motion.span>
-    )
-}
-
 function OrbPNG() {
-    return(
+    return (
         <motion.div
             layoutId="active-orb"
             initial={false}
             transition={{
                 type: "spring",
-                stiffness: 600, // Increased for snappier animation
-                damping: 35,    // Increased damping for less oscillation
-                mass: 0.4,      // Reduced mass for faster response
+                stiffness: 600,
+                damping: 35,
+                mass: 0.4,
                 layout: {
-                    duration: 0.15, // Reduced duration for faster animation
-                    ease: "easeOut" // Better easing for performance
+                    duration: 0.15,
+                    ease: "easeOut"
                 }
             }}
-            className="absolute top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full"
+            className="absolute inset-0 m-auto h-10 w-10 rounded-full z-10 pointer-events-none"
             style={{
-                // Add GPU acceleration hints
                 willChange: 'transform',
                 backfaceVisibility: 'hidden',
-                transform: 'translateZ(0)', // Force hardware acceleration
+                transform: 'translateZ(0)',
             }}
-            // Remove the expensive onLayoutAnimationComplete callback
             data-orb-id="main-orb"
         >
             <Image
                 src={OrbImage}
                 alt={"orb"}
-                priority // Ensure orb image loads fast
+                priority
                 style={{
                     filter: "drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25)) drop-shadow(0 40px 35px rgba(0, 0, 0, 0.25)) drop-shadow(0 13px 20px rgba(0, 0, 0, 0.45)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25))",
                     willChange: 'transform',
                     backfaceVisibility: 'hidden',
-                    transform: 'translateZ(0)', // Force hardware acceleration
+                    transform: 'translateZ(0)',
                 }}
             />
         </motion.div>
     )
 }
+
 const NAV_ITEMS = [
-    { href: "/", label: "Home", icon: HomeIcon },
-    { href: "/aboutme", label: "About", icon: AboutIcon },
-    { href: "/works", label: "Work", icon: WorksIcon },
-    { href: "/contact", label: "Contact", icon: ContactIcon },
+    { href: "/", label: "HOME", icon: HomeIcon },
+    { href: "/aboutme", label: "ABOUT ME", icon: AboutIcon },
+    { href: "/works", label: "PROJECTS", icon: WorksIcon },
+    { href: "/contact", label: "CONTACT", icon: ContactIcon },
 ];
 
 export default function MobileNavigationBar() {
     const pathname = usePathname();
     const router = useRouter();
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
     useEffect(() => {
-    // Warm the heavy pages so the orb animation isn’t blocked on hydration
         ["/aboutme", "/works", "/contact"].forEach((route) => router.prefetch(route));
     }, [router]);
 
@@ -292,53 +179,56 @@ export default function MobileNavigationBar() {
 
     return (
         <nav
-            className="fixed bottom-3 left-1/2 -translate-x-1/2 select-none"
+            className="fixed bottom-3 left-1/2 -translate-x-1/2 md:bottom-auto md:top-8 md:left-8 lg:top-[85px] lg:left-[75px] md:translate-x-0 select-none z-[60] w-fit"
             style={{ touchAction: "none" }}
             onTouchMove={(e) => e.preventDefault()}
         >
-            {/* Pill background */}
+            {/* Pill background - hugs content snugly with minimal padding and no extra space on either side */}
             <div
-                className="relative backgroundblur mx-auto h-[50px] w-fit rounded-full ring-1 ring-black/5"
+                className="relative backgroundblur h-[48px] w-fit rounded-full ring-1 ring-black/5 p-1 flex items-center justify-center shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
             >
-            {/*<GlassSurface*/}
-            {/*    width={232}*/}
-            {/*    height={50}*/}
-            {/*    borderRadius={50}*/}
-            {/*    distortionScale={-50}*/}
-            {/*    backgroundOpacity={0.4}*/}
-            {/*    brightness={100}*/}
-            {/*>*/}
-
-                {/* Soft top highlight */}
-                {/*<div className="pointer-events-none absolute inset-0 rounded-full [background:radial-gradient(120%_120%_at_50%_-10%,rgba(255,255,255,0.8),transparent_55%)]" />*/}
-
-                {/* Grid for items */}
-                <ul className="relative h-full flex flex-row place-items-center gap-x-2">
+                {/* List of items */}
+                <ul className="relative h-full flex flex-row items-center gap-1.5 md:gap-6 p-0 m-0 list-none">
                     {NAV_ITEMS.map((item, i) => (
-                        <li key={item.href} className="relative h-full w-full">
+                        <li
+                            key={item.href}
+                            className="relative h-10 w-10 flex-shrink-0 flex items-center justify-center"
+                            onMouseEnter={() => setHoveredIndex(i)}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                        >
                             <TransitionLink
                                 href={item.href}
-                                className="group relative mx-auto flex gap-5 h-full w-full items-center justify-center"
+                                className="group relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
                                 aria-label={item.label}
                             >
-
                                 {activeIndex === i && <OrbPNG />}
 
                                 {/* Icon */}
-                                <div className="relative z-20 w-13">
+                                <div className="relative z-20 flex items-center justify-center">
                                     <IconWrapper active={activeIndex === i}>
                                         <item.icon />
                                     </IconWrapper>
                                 </div>
                             </TransitionLink>
+
+                            {/* Hover label shown below the icon on desktop */}
+                            <AnimatePresence>
+                                {hoveredIndex === i && (
+                                    <motion.span
+                                        initial={{ opacity: 0, y: -4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        transition={{ duration: 0.15 }}
+                                        className={`hidden md:block absolute top-full mt-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] tracking-wider text-[#9D9D9D] font-normal pointer-events-none select-none uppercase ${sfMono.className}`}
+                                    >
+                                        {item.label}
+                                    </motion.span>
+                                )}
+                            </AnimatePresence>
                         </li>
                     ))}
                 </ul>
-
-                {/* Outer soft shadow to enhance the pill */}
-                <div className="pointer-events-none absolute inset-0 -z-10 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.18)]" />
             </div>
-            {/*</GlassSurface>*/}
         </nav>
     );
 }
@@ -347,8 +237,8 @@ function IconWrapper({ active, children }: { active: boolean; children: React.Re
     return (
         <motion.div
             className={
-                "grid place-items-center rounded-full p-2 transition-colors " +
-                (active ? "text-white" : "text-neutral-400")
+                "flex items-center justify-center rounded-full transition-colors " +
+                (active ? "text-white" : "text-neutral-400 group-hover:text-neutral-600")
             }
         >
             {children}
