@@ -56,9 +56,9 @@ function UIUXPopup({ onClose }: { onClose: () => void }) {
                 transition={{ ease: "easeInOut", duration: 0.2 }}
             >
                 <div
-                    className="w-[90%] h-full max-h-screen mx-auto relative flex justify-center py-4"
+                    className="w-[90%] h-full max-h-screen mx-auto relative flex items-center justify-center py-4"
                 >
-                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] w-full">
+                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] md:h-[50dvh] w-full md:w-10/12 lg:w-6/12">
                         {/* Top Row: Product Discovery & Requirements Analysis */}
                         <div className="flex flex-row gap-3 h-1/2 w-full">
                             <motion.div
@@ -69,15 +69,15 @@ function UIUXPopup({ onClose }: { onClose: () => void }) {
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.05 }}
                             >
                                 <div>
-                                    <p className={`${sfProDisplayMedium.className} text-sm text-[#222222]`}>Product Discovery & Scoping</p>
-                                    <p className={`${sfProDisplayLight.className} text-xs text-[#555555] mt-1`}>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg text-[#222222]`}>Product Discovery & Scoping</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base text-[#555555] mt-1`}>
                                         Problem definition, user workflow mapping, end-to-end journey definition & key failure scenario planning.
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-1 mt-2">
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Workflows</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Edge Cases</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>User Journey</span>
+                                <div className="flex flex-wrap gap-1 mt-2 text-[10px] md:text-sm">
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Workflows</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Edge Cases</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>User Journey</span>
                                 </div>
                             </motion.div>
 
@@ -89,15 +89,15 @@ function UIUXPopup({ onClose }: { onClose: () => void }) {
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.08 }}
                             >
                                 <div>
-                                    <p className={`${sfProDisplayMedium.className} text-sm text-[#222222]`}>Requirements & Agile BA</p>
-                                    <p className={`${sfProDisplayLight.className} text-xs text-[#555555] mt-1`}>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg text-[#222222]`}>Requirements & Agile BA</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base text-[#555555] mt-1`}>
                                         Translating product goals into user stories, measurable acceptance criteria, and system protocol specifications (SIP2, APIs).
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-1 mt-2">
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>User Stories</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Acceptance Criteria</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Agile / Scrum</span>
+                                <div className="flex flex-wrap gap-1 mt-2 text-[10px] md:text-sm">
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>User Stories</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Acceptance Criteria</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Agile / Scrum</span>
                                 </div>
                             </motion.div>
                         </div>
@@ -112,15 +112,15 @@ function UIUXPopup({ onClose }: { onClose: () => void }) {
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.12 }}
                             >
                                 <div>
-                                    <p className={`${sfProDisplayMedium.className} text-sm text-[#222222]`}>UI/UX & Prototyping</p>
-                                    <p className={`${sfProDisplayLight.className} text-xs text-[#555555] mt-1`}>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg text-[#222222]`}>UI/UX & Prototyping</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base text-[#555555] mt-1`}>
                                         Information architecture, wireframing, interactive prototyping in Figma, and self-service interface design.
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-1 mt-2">
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Figma</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Design Systems</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Prototyping</span>
+                                <div className="flex flex-wrap gap-1 mt-2 text-[10px] md:text-sm">
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Figma</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Design Systems</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Prototyping</span>
                                 </div>
                             </motion.div>
 
@@ -132,21 +132,21 @@ function UIUXPopup({ onClose }: { onClose: () => void }) {
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.15 }}
                             >
                                 <div>
-                                    <p className={`${sfProDisplayMedium.className} text-sm text-[#222222]`}>User Recovery & Validation</p>
-                                    <p className={`${sfProDisplayLight.className} text-xs text-[#555555] mt-1`}>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg text-[#222222]`}>User Recovery & Validation</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base text-[#555555] mt-1`}>
                                         Designing clear system feedback, empty states, and intuitive error-recovery flows to minimize transaction confusion.
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-1 mt-2">
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Feedback Loops</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Usability</span>
-                                    <span className={`${sfProDisplayLight.className} text-[10px] bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Validation</span>
+                                <div className="flex flex-wrap gap-1 mt-2 text-[10px] md:text-sm">
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Feedback Loops</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Usability</span>
+                                    <span className={`${sfProDisplayLight.className} bg-black/5 text-[#444444] px-2 py-0.5 rounded-md`}>Validation</span>
                                 </div>
                             </motion.div>
                         </div>
                     </div>
 
-                    <div className="absolute w-full h-[100%] max-h-[90vh]">
+                    <div className="absolute inset-0 pointer-events-none">
                         <button
                             onClick={onClose}
                             aria-label="Close"

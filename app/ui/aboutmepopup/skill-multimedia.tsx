@@ -56,9 +56,9 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                 transition={{ ease: "easeInOut", duration: 0.2 }}
             >
                 <div
-                    className="w-[90%] h-full max-h-screen mx-auto relative flex justify-center py-4"
+                    className="w-[90%] h-full max-h-screen mx-auto relative flex items-center justify-center py-4"
                 >
-                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] w-full">
+                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] md:h-[50dvh] w-full md:w-10/12 lg:w-6/12">
                         <div className="flex flex-row gap-3 h-8/12 w-full">
                             <motion.div
                                 className="relative w-1/2 h-full shadow-lg rounded-xl p-3"
@@ -67,8 +67,8 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.05 }}
                             >
-                                <p className={`${sfProDisplayMedium.className} text-sm`}>Photography</p>
-                                <p className={`${sfProDisplayLight.className} text-sm`}>Camera operation, shot framing & composition, basic lighting setup</p>
+                                <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Photography</p>
+                                <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>Camera operation, shot framing & composition, basic lighting setup</p>
                             </motion.div>
 
                             <motion.div
@@ -78,8 +78,8 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.1 }}
                             >
-                                <p className={`${sfProDisplayMedium.className} text-sm`}>Film & video</p>
-                                <p className={`${sfProDisplayLight.className} text-sm`}>Camera operation, storyboarding & shot planning</p>
+                                <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Film & video</p>
+                                <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>Camera operation, storyboarding & shot planning</p>
                             </motion.div>
                         </div>
 
@@ -90,16 +90,16 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ ease: "easeInOut", duration: 0.2, delay: 0.15 }}
                         >
-                            <p className={`${sfProDisplayMedium.className} text-sm`}>Post-production</p>
-                            <p className={`${sfProDisplayLight.className} text-sm`}>Lightroom, Photoshop, Premiere Pro</p>
+                            <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Post-production</p>
+                            <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>Lightroom, Photoshop, Premiere Pro</p>
                         </motion.div>
                     </div>
 
-                    <div className="absolute w-full h-[100%] max-h-[90vh]">
+                    <div className="absolute inset-0 pointer-events-none">
                         <button
                             onClick={onClose}
                             aria-label="Close"
-                            className="pointer-events-auto absolute bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl"
+                            className="pointer-events-auto absolute bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
                             style={buttonStyle}
                         >
                             <HugeiconsIcon

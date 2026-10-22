@@ -75,7 +75,7 @@ function AboutMe() {
             className="scroll-snap overflow-x-hidden scrollbar-hide"
         >
             {/* Section 1: Hero Intro */}
-            <div className={`h-screen flex flex-col justify-center -mt-20 md:-mt-12 items-center text-5xl md:text-7xl lg:text-8xl w-full overflow-hidden ${appleGaramondItalic.className}`}>
+            <div className={`h-screen flex flex-col justify-center -mt-20 md:-mt-12 items-center text-5xl md:text-6xl lg:text-7xl w-full overflow-hidden ${appleGaramondItalic.className}`}>
                 <p className="color-word">About Me</p>
                 <p className={`${sfProDisplayLight.className} mx-6 text-base md:text-lg lg:text-xl text-center mt-5 md:mt-8 max-w-2xl`}>
                     I’m Dương Minh Thuận. Here’s a quick look at my background, skills, and the <br className="hidden md:block" />experiences behind my work.

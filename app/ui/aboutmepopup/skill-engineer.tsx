@@ -57,9 +57,9 @@ function EngineerPopup({ onClose }: { onClose: () => void }) {
                 transition={{ ease: "easeInOut", duration: 0.2 }}
             >
                 <div
-                    className="w-[90%] h-full max-h-screen mx-auto relative flex justify-center py-4"
+                    className="w-[90%] h-full max-h-screen mx-auto relative flex items-center justify-center py-4"
                 >
-                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] w-full">
+                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] md:h-[50dvh] w-full md:w-10/12 lg:w-6/12">
                         <div className="flex flex-row gap-3 h-3/4 w-full">
                             {/* `relative` ở các card có sticker để sticker (absolute) bám theo card, không bám theo phần tử ngoài */}
                             <motion.div
@@ -69,8 +69,8 @@ function EngineerPopup({ onClose }: { onClose: () => void }) {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ ease: "easeInOut", duration: 0.2, delay: 0.05 }}
                             >
-                                <p className={`${sfProDisplayMedium.className} text-sm`}>Mobile Software Engineering</p>
-                                <p className={`${sfProDisplayLight.className} text-sm`}>React Native, TypeScript, Nativewind, Expo (ShopBack, Zeno)</p>
+                                <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Mobile Software Engineering</p>
+                                <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>React Native, TypeScript, Nativewind, Expo (ShopBack, Zeno)</p>
 
                                 <CldImage src="typescript" height={80} width={80} alt={"TypeScript"} className="absolute bottom-0 left-0 drop-shadow-lg -rotate-5" />
                                 <CldImage src="expo" height={90} width={90} alt={"Expo"} className="absolute bottom-5 left-1/6 drop-shadow-md rotate-6" />
@@ -86,8 +86,8 @@ function EngineerPopup({ onClose }: { onClose: () => void }) {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ ease: "easeInOut", duration: 0.2, delay: 0.1 }}
                                 >
-                                    <p className={`${sfProDisplayMedium.className} text-sm`}>Web & Modern Frontend</p>
-                                    <p className={`${sfProDisplayLight.className} text-sm`}>ReactJS, Next.js, TypeScript, Tailwind, Motion</p>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Web & Modern Frontend</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>ReactJS, Next.js, TypeScript, Tailwind, Motion</p>
 
                                     <CldImage src="typescript" height={60} width={60} alt={"TypeScript"} className="absolute bottom-0 left-0 drop-shadow-lg -rotate-5" />
                                     <CldImage src="react" height={70} width={70} alt={"React"} className="absolute bottom-6 left-[10%] drop-shadow-md rotate-6" />
@@ -103,8 +103,8 @@ function EngineerPopup({ onClose }: { onClose: () => void }) {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ ease: "easeInOut", duration: 0.2, delay: 0.15 }}
                                 >
-                                    <p className={`${sfProDisplayMedium.className} text-sm`}>System & Connectivity</p>
-                                    <p className={`${sfProDisplayLight.className} text-sm`}>RESTful APIs, BLE (ESP32), Firebase Realtime, Cloud AI</p>
+                                    <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>System & Connectivity</p>
+                                    <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>RESTful APIs, BLE (ESP32), Firebase Realtime, Cloud AI</p>
 
                                     <CldImage src="bluetooth" height={80} width={80} alt={"Bluetooth"} className="absolute bottom-0 left-0 drop-shadow-lg -rotate-5" />
                                     <CldImage src="firebase" height={90} width={90} alt={"Firebase"} className="absolute bottom-5 left-1/6 drop-shadow-md rotate-6" />
@@ -120,16 +120,16 @@ function EngineerPopup({ onClose }: { onClose: () => void }) {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ ease: "easeInOut", duration: 0.2, delay: 0.2 }}
                         >
-                            <p className={`${sfProDisplayMedium.className} text-sm`}>Engineering Architecture</p>
-                            <p className={`${sfProDisplayLight.className} text-sm`}>Component lifecycle, state management, in-app UX performance & responsive interfaces</p>
+                            <p className={`${sfProDisplayMedium.className} text-sm md:text-lg`}>Engineering Architecture</p>
+                            <p className={`${sfProDisplayLight.className} text-xs md:text-base mt-1`}>Component lifecycle, state management, in-app UX performance & responsive interfaces</p>
                         </motion.div>
                     </div>
 
-                    <div className="absolute w-full h-[100%] max-h-[90vh]">
+                    <div className="absolute inset-0 pointer-events-none">
                         <button
                             onClick={onClose}
                             aria-label="Close"
-                            className="pointer-events-auto absolute bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl"
+                            className="pointer-events-auto absolute bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
                             style={buttonStyle}
                         >
                             <HugeiconsIcon
