@@ -203,7 +203,7 @@ function AboutMeFolder({
                 <div className="w-[89px] h-[83px] bg-[#EFEFEF] ring-1 ring-[#D9D9D9] rounded-xl absolute -z-30 top-[4px] left-1/2 -translate-x-1/2" />
             </div>
 
-            <p className={`${sfProDisplayMedium.className} text-sm -mt-7`}>
+            <p className={`${sfProDisplayMedium.className} text-sm lg:text-base -mt-7`}>
                 {title}
             </p>
 

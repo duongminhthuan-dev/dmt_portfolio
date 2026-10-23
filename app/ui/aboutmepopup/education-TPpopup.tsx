@@ -43,7 +43,7 @@ function TPPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2 }}
-                        className="absolute"
+                        className="absolute md:-top-10"
                     >
                         <CldImage
                             src="edu-tp-1"
@@ -59,8 +59,7 @@ function TPPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2, delay: 0.1 }}
-                        className="absolute top-[3%] right-0"
-                    >
+                        className="absolute top-[3%] md:-top-3 right-0 md:right-3">
                         <CldImage
                             src="edu-tp-2"
                             height={320}
@@ -112,7 +111,7 @@ function TPPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2, delay: 0.4 }}
-                        className="absolute bottom-[30%] right-0 w-fit h-fit"
+                        className="absolute bottom-[30%] md:bottom-36 right-0 w-fit h-fit"
                     >
                         <CldImage
                             src="edu-tp-4"

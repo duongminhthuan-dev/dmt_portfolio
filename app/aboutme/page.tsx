@@ -120,7 +120,7 @@ function AboutMe() {
 
                 <div className="flex flex-col md:flex-row justify-center items-center md:gap-12 lg:gap-20 w-full">
                     {/* Folder 1: Product Management & Design */}
-                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative -left-16 md:static md:left-auto" >
+                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative -left-16 lg:left-0 md:static md:left-auto" >
                         <AboutMeFolderDynamic
                             images={[
                                 { src: "uiux-1", alt: "test" },
@@ -133,7 +133,7 @@ function AboutMe() {
                     </div>
 
                     {/* Folder 2: Software Engineering */}
-                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative left-16 -mt-6 md:static md:left-auto md:mt-0">
+                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative left-16 lg:left-0 -mt-6 md:static md:left-auto md:mt-0">
                         <AboutMeFolderDynamic
                             images={[
                                 { src: "expo-fill", alt: "test" },
@@ -146,7 +146,7 @@ function AboutMe() {
                     </div>
 
                     {/* Folder 3: Media Producer */}
-                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative right-2 -mt-6 md:static md:right-auto md:mt-0">
+                    <div style={{ containIntrinsicSize: "129px 155px" }} className="p-4 relative right-2 lg:left-0 -mt-6 md:static md:right-auto md:mt-0">
                         <AboutMeFolderDynamic
                             images={[
                                 { src: "media-thumb-1", alt: "test" },

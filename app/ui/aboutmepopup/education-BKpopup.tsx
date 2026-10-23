@@ -43,7 +43,7 @@ function BKPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2 }}
-                        className="absolute"
+                        className="absolute left-0 md:left-3 top-0 md:-top-3"
                     >
                         <CldImage
                             src="edu-bk-1"
@@ -59,7 +59,7 @@ function BKPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2, delay: 0.1 }}
-                        className="absolute top-[3%] right-0"
+                        className="absolute top-[3%] right-0 md:-top-8 md:right-3"
                     >
                         <CldImage
                             src="edu-bk-2"
@@ -96,7 +96,7 @@ function BKPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2, delay: 0.3 }}
-                        className="absolute bottom-[15%] left-0"
+                        className="absolute bottom-[15%] left-0 md:left-4 md:bottom-1/8"
                     >
                         <CldImage
                             src="edu-bk-3"
@@ -112,7 +112,7 @@ function BKPopup({ onClose }: { onClose: () => void }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.2, delay: 0.4 }}
-                        className="absolute bottom-[22%] right-0 w-fit h-fit"
+                        className="absolute bottom-[22%] right-0 w-fit h-fit md:bottom-1/6 md:right-3"
                     >
                         <CldImage
                             src="edu-bk-4"

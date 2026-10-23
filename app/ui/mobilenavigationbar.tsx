@@ -179,7 +179,7 @@ export default function MobileNavigationBar() {
 
     return (
         <nav
-            className="fixed bottom-3 left-1/2 -translate-x-1/2 md:bottom-auto md:top-8 md:left-8 lg:top-[85px] lg:left-[75px] md:translate-x-0 select-none z-[60] w-fit"
+            className="fixed bottom-3 left-1/2 -translate-x-1/2 md:bottom-auto md:top-16 md:left-16 lg:top-16 lg:left-16 md:translate-x-0 select-none z-[60] w-fit"
             style={{ touchAction: "none" }}
             onTouchMove={(e) => e.preventDefault()}
         >
@@ -188,7 +188,7 @@ export default function MobileNavigationBar() {
                 className="relative backgroundblur h-[48px] w-fit rounded-full ring-1 ring-black/5 p-1 flex items-center justify-center shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
             >
                 {/* List of items */}
-                <ul className="relative h-full flex flex-row items-center gap-1.5 md:gap-6 p-0 m-0 list-none">
+                <ul className="relative h-full flex flex-row items-center gap-4 md:gap-6 p-0 m-0 list-none">
                     {NAV_ITEMS.map((item, i) => (
                         <li
                             key={item.href}

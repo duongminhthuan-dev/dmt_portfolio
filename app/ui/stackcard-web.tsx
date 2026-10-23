@@ -74,10 +74,10 @@ interface StackProps {
 const defaultCardItems: CardItem[] = [
   {
     id: 1,
-    image: 'shoko_hero',
-    title: 'Shoko',
-    description: 'Product design, UX research, and interface prototyping for Shoko.',
-    href: '/works/product/shoko'
+    image: 'talksign_thumb_1',
+    title: 'TalkSign',
+    description: 'A web application that translates sign language into text. Built for Naver AI Hackathon 2025 Final round, with React and Naver Cloud Platform.',
+    href: '/works/product/talksign'
   },
   {
     id: 2,
@@ -88,11 +88,11 @@ const defaultCardItems: CardItem[] = [
   },
   {
     id: 3,
-    image: 'talksign_thumb_1',
-    title: 'TalkSign',
-    description: 'A web application that translates sign language into text. Built for Naver AI Hackathon 2025 Final round, with React and Naver Cloud Platform.',
-    href: '/works/product/talksign'
-  }
+    image: 'shoko_hero',
+    title: 'Shoko',
+    description: 'Product design, UX research, and interface prototyping for Shoko.',
+    href: '/works/product/shoko'
+  },
 ];
 
 function sleep(milliseconds: number) {

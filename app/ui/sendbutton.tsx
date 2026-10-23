@@ -53,17 +53,17 @@ function SendButton({state = "idle"}: {state: "idle" | "sending" | "sent" | "err
                     boxShadow:
                         "0 1px 2px 0px rgba(0,0,0,0.25), 0 13px 20px 0px rgba(0,0,0,0.45), 0 40px 35px 0px rgba(0,0,0,0.25), 0 5px 5px 0px rgba(0,0,0,0.25)",
                 }}
-                variants={{ rest: { opacity: 1 }, hover: { opacity: 0 } }}
+                variants={{ rest: { opacity: 1 }, hover: { opacity: 0 }, tap: { opacity: 0 } }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
-            {/* Bóng trạng thái HOVER (đỏ) */}
+            {/* Bóng trạng thái HOVER/TAP (đỏ) */}
             <motion.div
                 className="pointer-events-none absolute inset-0 rounded-full"
                 style={{
                     boxShadow:
                         "0 1px 2px 0px rgba(186,0,0,0.25), 0 13px 20px 0px rgba(186,0,0,0.45), 0 40px 35px 0px rgba(15,0,0,0.25), 0 5px 5px 0px rgba(0,0,0,0.25)",
                 }}
-                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 }, tap: { opacity: 1 } }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
 
@@ -142,26 +142,26 @@ function SendButton({state = "idle"}: {state: "idle" | "sending" | "sent" | "err
             {/* Phản sáng trên cùng */}
             <div className="absolute bg-linear-to-b from-[rgba(255,255,255,0.25)] from-10% via-[rgba(0,0,0,0)] via-30% to-[rgba(0,0,0,0)] to-90% inset-0 w-[88%] h-1/2 rounded-full mx-auto mt-[4px]" />
 
-            {/* Inner shadow đen mờ dần khi hover */}
+            {/* Inner shadow đen mờ dần khi hover/tap */}
             <motion.div
                 className="absolute inset-0 rounded-full"
                 style={{ boxShadow: "0 0 14px 4px rgba(255,255,255,0.25) inset, 0 0 17px 0 rgba(255,255,255,0.08) inset" }}
-                variants={{ rest: { opacity: 1 }, hover: { opacity: 0 } }}
+                variants={{ rest: { opacity: 1 }, hover: { opacity: 0 }, tap: { opacity: 0 } }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
 
-            {/* Inner shadow đỏ hiện dần khi hover */}
+            {/* Inner shadow đỏ hiện dần khi hover/tap */}
             <motion.div
                 className="absolute inset-0 rounded-full"
                 style={{ boxShadow: "0 0 14px 4px rgba(255,255,255,0.25) inset, 0 -5px 17px 0 rgba(168,0,0,0.4) inset" }}
-                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 }, tap: { opacity: 1 } }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
 
             {/* Glow dưới đáy */}
             <motion.div
                 className="absolute w-24 h-6 left-1/2 -translate-x-1/2 -bottom-2.5 bg-[#BA0000] blur-lg rounded-full"
-                variants={{ rest: { opacity: 0 }, hover: { opacity: 0.7 } }}
+                variants={{ rest: { opacity: 0 }, hover: { opacity: 0.7 }, tap: { opacity: 0.7 } }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
 
@@ -172,6 +172,7 @@ function SendButton({state = "idle"}: {state: "idle" | "sending" | "sent" | "err
                 variants={{
                     rest:  { backgroundColor: "rgba(70,70,70,1)",  boxShadow: "0 2px 1.5px 1px rgba(11,11,11,0.30) inset" },
                     hover: { backgroundColor: "rgba(255,108,108,1)", boxShadow: "0 1.5px 1.5px 1px rgba(199,35,35,1) inset" },
+                    tap:   { backgroundColor: "rgba(255,108,108,1)", boxShadow: "0 1.5px 1.5px 1px rgba(199,35,35,1) inset" },
                 }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />

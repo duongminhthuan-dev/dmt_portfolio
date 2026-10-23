@@ -1,11 +1,12 @@
 "use client";
 
 import AppleGaramond from 'next/font/local';
-import { motion} from "motion/react"
+import { motion } from "motion/react";
 import Button from "@/app/ui/button";
 import Image from "next/image";
 import SplitText from "./splittext";
 import { useEffect } from "react";
+import TransitionLink from "@/utils/transitionlink";
 
 const appleGaramond = AppleGaramond({
   weight:"400",
@@ -58,7 +59,9 @@ export default function Home() {
                             exit={{opacity: 0, transform: "translateX(-60px)" }}
                             transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
                         >
-                            <Button />
+                            <TransitionLink href="/aboutme" className="block w-fit">
+                                <Button />
+                            </TransitionLink>
                         </motion.div>
                     </div>
 
@@ -84,5 +87,5 @@ export default function Home() {
                 </motion.div>
             </motion.div>
         </div>
-  );
+    );
 }

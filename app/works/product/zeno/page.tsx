@@ -38,7 +38,7 @@ const sfProDisplayMedium = SFProDisplayMedium({
     variable: "--SFProDisplayMedium",
 })
 
-export default function Ananas() {
+export default function Zeno() {
     const myRouter = useRouter();
 
     useEffect(() => {
@@ -100,6 +100,23 @@ export default function Ananas() {
                 </motion.div>
 
                 <motion.div
+                    initial={{opacity:0, y:20}}
+                    animate={{opacity:1, y:0}}
+                    transition={{delay: 0.4}}
+                    className="w-full text-left"
+                >
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">zeno - Smartwatch Companion App</span>
+                        <p className="text-left w-full">
+                            A companion mobile app built to communicate and synchronize with an ESP32-based custom smartwatch,
+                            developed for the Logic Design Project course. Taking end-to-end ownership, I led the product from UI/UX
+                            ideation in Figma to full-stack mobile development—handling Bluetooth Low Energy (BLE) connectivity,
+                            real-time telemetry syncing, and intuitive companion features for everyday wearable use.
+                        </p>
+                    </div>
+                </motion.div>
+
+                <motion.div
                     className="flex-1"
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
@@ -156,26 +173,6 @@ export default function Ananas() {
                         </div>
                     </motion.div>
                 </div>
-
-                <motion.div
-                    className="h-fit bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border px-4 md:px-6 py-2 md:py-4 flex flex-col text-left"
-                    style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                        backdropFilter: "blur(4px)",
-                    }}
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
-                    transition={{delay: 0.4}}
-                >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base mt-3 leading-relaxed text-left`}>
-                        A React Native app connecting to an ESP32-based smart watch, built for my Logic Design
-                        Project course. I handled the entire app development, from UI/UX design to coding.
-                    </p>
-                    <p className="text-sm md:text-base my-3 text-left">
-                        <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
-                        <span className={`${sfProDisplayLight.className}`}>React Native, Firebase, Figma</span>
-                    </p>
-                </motion.div>
             </div>
         </div>
     )
