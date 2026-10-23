@@ -33,7 +33,7 @@ function Product() {
     }, []);
 
     return (
-        <div className="h-screen flex flex-col justify-between">
+        <div className="h-screen flex flex-col md:justify-between">
             <div>
                 <motion.p
                     className={`${appleGaramondItalic.className} text-4xl md:text-5xl lg:text-6xl text-[#BA0000] mt-12 md:mt-16 w-full text-center`}
@@ -55,7 +55,7 @@ function Product() {
             </div>
 
             <motion.div
-                className="my-auto -translate-y-16 md:-translate-y-12 flex justify-center items-center"
+                className="my-auto -translate-y-20 md:-translate-y-12 flex justify-center items-center"
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 0.5}}
@@ -68,7 +68,7 @@ function Product() {
                     />
                 </div>
             </motion.div>
-            <div className="h-10" />
+            <div className="hidden md:block h-10" />
         </div>
     )
 }

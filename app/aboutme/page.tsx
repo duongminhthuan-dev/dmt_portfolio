@@ -115,7 +115,7 @@ function AboutMe() {
             </div>
 
             {/* Section 3: Skills */}
-            <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-24 md:pb-16 max-w-6xl mx-auto">
+            <div className="h-screen w-full overflow-hidden flex flex-col justify-center items-center pb-[15%] md:pb-16 max-w-6xl mx-auto">
                 <p className={`mt-5 ${appleGaramondItalic.className} text-4xl md:text-6xl text-center mb-5 md:mb-12 color-word`}>Skills</p>
 
                 <div className="flex flex-col md:flex-row justify-center items-center md:gap-12 lg:gap-20 w-full">

@@ -54,7 +54,7 @@ export default function Ananas() {
     return (
         <div className="h-screen overflow-y-auto scrollbar-hide overscroll-none">
             {/* Sticky Header */}
-            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] p-4 md:px-8 md:py-6">
+            <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-[2px] [-webkit-backdrop-filter:blur(2px)] py-2.5 px-4 md:px-8 md:py-6">
                 <div className="flex flex-row w-full justify-between items-center max-w-5xl lg:max-w-6xl mx-auto">
                     <div
                         className={`${sfMono.className} flex justify-center items-center gap-3 md:gap-4 cursor-pointer text-sm md:text-base select-none transition-transform hover:-translate-x-1 duration-150`}
@@ -77,7 +77,7 @@ export default function Ananas() {
                 </div>
             </div>
 
-            <div className="flex flex-col px-4 md:px-8 pb-28 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
+            <div className="flex flex-col px-4 md:px-8 pb-20 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
                 <motion.div
                     className="h-24 md:h-36 max-h-[300px] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex items-end overflow-hidden"
                     style={{
