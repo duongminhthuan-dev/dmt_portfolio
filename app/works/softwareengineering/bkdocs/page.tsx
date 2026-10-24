@@ -74,6 +74,7 @@ export default function BKDocs() {
             </div>
 
             <div className="flex flex-col px-4 md:px-8 pb-20 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
+                {/* Main Overview Image */}
                 <motion.div
                     className="bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                     style={{
@@ -95,11 +96,31 @@ export default function BKDocs() {
                     </div>
                 </motion.div>
 
+                {/* Description Block */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="w-full text-left"
+                >
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">BKDocs - Student Learning Materials</span>
+                        <p className="text-left w-full">
+                            An app that helps HCMUT students find and manage learning materials.
+                            I took the responsibility for sign in, home, notification, and documents&apos; detail screens.
+                        </p>
+                        <p className="text-sm md:text-base mt-2 text-left">
+                            <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
+                            <span>React Native, Expo</span>
+                        </p>
+                    </div>
+                </motion.div>
+
                 <motion.div
                     className="flex-1"
                     initial={{opacity:0, y:20}}
                     animate={{opacity:1, y:0}}
-                    transition={{delay: 0.1}}
+                    transition={{delay: 0.3}}
                 >
                     <div className="aspect-[5/2] md:aspect-[16/6] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex overflow-hidden relative"
                          style={{
@@ -115,7 +136,7 @@ export default function BKDocs() {
                     <motion.div className="flex-1"
                                 initial={{opacity:0, y:20}}
                                 animate={{opacity:1, y:0}}
-                                transition={{delay: 0.2}}
+                                transition={{delay: 0.4}}
                     >
                         <div
                             className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
@@ -136,7 +157,7 @@ export default function BKDocs() {
                     <motion.div className="flex-1"
                                 initial={{opacity:0, y:20}}
                                 animate={{opacity:1, y:0}}
-                                transition={{delay: 0.3}}
+                                transition={{delay: 0.5}}
                     >
                         <div
                             className="relative aspect-[3/2] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
@@ -154,26 +175,6 @@ export default function BKDocs() {
                         </div>
                     </motion.div>
                 </div>
-
-                <motion.div
-                    className="h-fit bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border px-4 md:px-6 py-2 md:py-4 flex flex-col text-left"
-                    style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                        backdropFilter: "blur(4px)",
-                    }}
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
-                    transition={{delay: 0.4}}
-                >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base mt-3 leading-relaxed text-left`}>
-                        An app that helps HCMUT students find and manage learning materials.
-                        I took the responsibility for sign in, home, notification, and documents{"'"} detail screens.
-                    </p>
-                    <p className="text-sm md:text-base my-3 text-left">
-                        <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
-                        <span className={`${sfProDisplayLight.className}`}>React Native, Expo</span>
-                    </p>
-                </motion.div>
             </div>
         </div>
     )

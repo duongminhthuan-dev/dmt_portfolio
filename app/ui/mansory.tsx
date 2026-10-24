@@ -48,21 +48,21 @@ const preloadImages = async (urls: string[]): Promise<void> => {
   );
 };
 
-interface Item {
+export interface Item {
   id: string;
   img: string;
   url: string;
   height: number;
 }
 
-interface GridItem extends Item {
+export interface GridItem extends Item {
   x: number;
   y: number;
   w: number;
   h: number;
 }
 
-interface MasonryProps {
+export interface MasonryProps {
   items: Item[];
   ease?: string;
   duration?: number;
@@ -72,6 +72,7 @@ interface MasonryProps {
   hoverScale?: number;
   blurToFocus?: boolean;
   colorShiftOnHover?: boolean;
+  onItemClick?: (item: Item) => void;
 }
 
 const Masonry: React.FC<MasonryProps> = ({
@@ -83,7 +84,8 @@ const Masonry: React.FC<MasonryProps> = ({
   scaleOnHover = true,
   hoverScale = 0.95,
   blurToFocus = true,
-  colorShiftOnHover = false
+  colorShiftOnHover = false,
+  onItemClick
 }) => {
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
@@ -127,14 +129,14 @@ const Masonry: React.FC<MasonryProps> = ({
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
+  const { grid, containerHeight } = useMemo(() => {
+    if (!width) return { grid: [], containerHeight: 0 };
     const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
-    return items.map(child => {
+    const gridItems = items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
@@ -143,6 +145,8 @@ const Masonry: React.FC<MasonryProps> = ({
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
+
+    return { grid: gridItems, containerHeight: Math.max(...colHeights) };
   }, [columns, items, width]);
 
   const hasMounted = useRef(false);
@@ -217,14 +221,24 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
+    <div
+      ref={containerRef}
+      className="relative w-full"
+      style={{ minHeight: containerHeight > 0 ? `${containerHeight}px` : undefined }}
+    >
       {grid.map(item => (
         <div
           key={item.id}
           data-key={item.id}
-          className="absolute box-content"
+          className="absolute box-content cursor-pointer"
           style={{ willChange: 'transform, width, height, opacity' }}
-          // onClick={() => window.open(item.url, '_blank', 'noopener')}
+          onClick={() => {
+            if (onItemClick) {
+              onItemClick(item);
+            } else if (item.url && item.url !== '#') {
+              window.open(item.url, '_blank', 'noopener');
+            }
+          }}
           onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
           onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
         >

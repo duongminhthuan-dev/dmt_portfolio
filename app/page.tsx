@@ -73,7 +73,7 @@ export default function Home() {
                         transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 }}
                     >
                         <Image
-                            src="/images/HomeImage.jpg"
+                            src="/images/HomeImage.webp"
                             alt="Home image"
                             fill
                             className="object-cover object-center"

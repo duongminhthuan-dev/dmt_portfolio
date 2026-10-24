@@ -74,17 +74,17 @@ interface StackProps {
 const defaultCardItems: CardItem[] = [
   {
     id: 1,
-    image: 'media-thumb-2',
-    title: '1000 Eyes - Shot at HCMC Metro System',
-    description: 'A brief description of project 2',
-    href: '/works/product/ananas'
+    image: 'media-main-2',
+    title: 'Quynh Lan\'s Graduation Day',
+    description: '-',
+    href: ''
   },
   {
     id: 2,
-    image: 'media-main-2',
-    title: 'Quynh Lan\'s Graduation Day',
-    description: 'A brief description of project 1',
-    href: '/works/product/ananas'
+    image: 'media-thumb-2',
+    title: '1000 Eyes - Shot at HCMC Metro System',
+    description: 'A street photography series capturing quiet moments, everyday glances, and reflections on Saigon\'s first metro line.',
+    href: '/works/multimediaprod/1000eyes'
   }
 ];
 
