@@ -49,7 +49,7 @@ export default function Home() {
                                 splitType="words"
                                 highlightWords={['designer', 'builder', 'developer', 'photographer']}
                                 delay={150}
-                                className="text-2xl md:text-4xl lg:text-[44px] xl:text-5xl"
+                                className="text-2xl md:text-4xl lg:text-[44px] xl:text-5xl leading-none md:leading-[1.2]"
                             />
                         </div>
                         <motion.div
