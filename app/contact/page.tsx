@@ -54,11 +54,16 @@ function Contact() {
 
         const handleScroll = () => {
             if (isInputFocused.current && window.innerWidth < 768) {
-                el.scrollTop = lockedScrollTop.current;
+                const form = el.querySelector('form');
+                if (form && form.contains(document.activeElement)) {
+                    el.scrollTop = lockedScrollTop.current;
+                } else {
+                    isInputFocused.current = false;
+                }
             }
         };
 
-        el.addEventListener("scroll", handleScroll, { passive: false });
+        el.addEventListener("scroll", handleScroll, { passive: true });
         return () => el.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -77,15 +82,14 @@ function Contact() {
 
     // Handle input blur
     const handleInputBlur = useCallback(() => {
-        isInputFocused.current = false;
-        
         const el = scrollRef.current;
-        if (el && window.innerWidth < 768) {
-            setTimeout(() => {
-                el.scrollTo({ top: el.clientHeight, behavior: "smooth" });
-                window.scrollTo(0, 0);
-            }, 50);
-        }
+        setTimeout(() => {
+            const form = el?.querySelector('form');
+            if (!form || !form.contains(document.activeElement)) {
+                isInputFocused.current = false;
+                setActive(null);
+            }
+        }, 50);
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -124,9 +128,9 @@ function Contact() {
     };
 
     return (
-        <div className="h-screen w-screen overflow-hidden">
+        <>
             {/* Desktop View: Side-by-side 2-column layout */}
-            <div className="hidden md:flex h-screen w-full max-w-6xl mx-auto items-center justify-between px-8 lg:px-16 gap-12 lg:gap-20">
+            <div className="hidden md:flex h-screen w-full max-w-6xl mx-auto items-center justify-between px-8 lg:px-16 gap-12 lg:gap-20 overflow-hidden">
                 {/* Left Column: Message Form */}
                 <div className="flex-1 flex flex-col justify-center max-w-lg">
                     <p className={`text-4xl lg:text-5xl text-left mb-6 color-word ${appleGaramondItalic.className}`}>
@@ -241,8 +245,8 @@ function Contact() {
                     </div>
 
                     <div className={`${sfProDisplayLight.className} mt-8 text-[#888888] text-sm`}>
-                        <p>Brought to you by Duong Minh Thuan aka Toonie</p>
-                        <p>Last updated: 10/10/2026</p>
+                        <p>Brought to you by Duong Minh Thuan aka Dumith</p>
+                        <p>Last updated: 25/10/2026</p>
                     </div>
                 </div>
             </div>
@@ -250,9 +254,9 @@ function Contact() {
             {/* Mobile View: 2 scroll-snap sections */}
             <motion.div
                 ref={scrollRef}
-                className="md:hidden scroll-snap overflow-x-hidden scrollbar-hide overscroll-none h-screen"
+                className="md:hidden scroll-snap overflow-x-hidden scrollbar-hide"
             >
-                <div className="h-screen w-full overflow-hidden scrollbar-hide overscroll-none">
+                <div className="h-screen w-full overflow-hidden">
                     <p className={`mt-10 ${appleGaramondItalic.className} text-5xl text-center mb-5 color-word`}>Contact</p>
 
                     <div className="mx-6">
@@ -308,7 +312,7 @@ function Contact() {
                 </div>
 
                 <div 
-                    className="h-screen w-full overflow-hidden scrollbar-hide overscroll-none flex flex-col"
+                    className="h-screen w-full overflow-hidden flex flex-col"
                     tabIndex={-1}
                     onClick={(e) => {
                         const form = e.currentTarget.querySelector('form');
@@ -325,8 +329,6 @@ function Contact() {
                     <form 
                         className="mx-6 flex flex-col gap-4"
                         onSubmit={handleSubmit}
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
                     >
                         <input
                             type="text" 
@@ -377,11 +379,11 @@ function Contact() {
                 
                     <div className={`${sfProDisplayLight.className} mb-[14.5vh] text-[#888888] mx-6`}>
                         <p className="text-sm">Brought to you by Duong Minh Thuan aka Dumith</p>
-                        <p className="text-sm">Last updated: 22/10/2026</p>
+                        <p className="text-sm">Last updated: 25/10/2026</p>
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </>
     )
 }
 

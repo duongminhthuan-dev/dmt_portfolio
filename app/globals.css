@@ -89,11 +89,15 @@ body {
 .scroll-snap {
   scroll-snap-type: y mandatory;
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scroll-snap > * {
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Hide scrollbar for snap scrolling */

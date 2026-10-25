@@ -22,7 +22,7 @@ function SendButton({state = "idle"}: {state: "idle" | "sending" | "sent" | "err
 
     return (
         <motion.button
-            className={`${sfMonoSemibold.className} relative py-3 px-6 bg-black text-white rounded-full w-[140px]`}
+            className={`${sfMonoSemibold.className} relative py-3 px-6 bg-black text-white rounded-full w-[140px] cursor-pointer`}
             initial="rest"
             whileHover="hover"
             whileTap="tap"
@@ -176,17 +176,6 @@ function SendButton({state = "idle"}: {state: "idle" | "sending" | "sent" | "err
                 }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
-
-            {/* Mask pill */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-                <defs>
-                    <mask id="ellipseMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
-                        <rect width="100%" height="100%" fill="black" />
-                        <ellipse cx="50%" cy="50%" rx="90%" ry="60" transform="translate(0,-50)" fill="#1D1D1D" opacity={0.9} />
-                    </mask>
-                </defs>
-                <rect x="0" y="0" width="100%" height="100%" rx="20" ry="50%" fill="currentColor" mask="url(#ellipseMask)" />
-            </svg>
         </motion.button>
     );
 }

@@ -14,7 +14,7 @@ const DURATION = 0.25;
 function Button() {
     return (
         <motion.div
-            className={`${sfMonoSemibold.className} relative py-3 px-6 bg-black text-white rounded-full w-fit`}
+            className={`${sfMonoSemibold.className} relative py-3 px-6 bg-black text-white rounded-full w-fit cursor-pointer`}
             initial="rest"
             whileHover="hover"
             whileTap="tap"
@@ -77,7 +77,7 @@ function Button() {
                     </filter>
                   </defs>
                 </svg>
-              </span>
+            </span>
 
             {/* Phản sáng trên cùng */}
             <div className="absolute bg-linear-to-b from-[rgba(255,255,255,0.25)] from-10% via-[rgba(0,0,0,0)] via-30% to-[rgba(0,0,0,0)] to-90% inset-0 w-[88%] h-1/2 rounded-full mx-auto mt-[4px]" />
@@ -116,17 +116,6 @@ function Button() {
                 }}
                 transition={{ type: "tween", ease: EASE, duration: DURATION }}
             />
-
-            {/* Mask pill */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-                <defs>
-                    <mask id="ellipseMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
-                        <rect width="100%" height="100%" fill="black" />
-                        <ellipse cx="50%" cy="50%" rx="90%" ry="60" transform="translate(0,-50)" fill="#1D1D1D" opacity={0.9} />
-                    </mask>
-                </defs>
-                <rect x="0" y="0" width="100%" height="100%" rx="20" ry="50%" fill="currentColor" mask="url(#ellipseMask)" />
-            </svg>
         </motion.div>
     );
 }

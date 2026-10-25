@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import React from "react";
 import Masonry from "@/app/ui/mansory";
 import SFMono from "next/font/local";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
@@ -36,24 +36,24 @@ const sfMono = SFMono({
 });
 
 const appleGaramond = AppleGaramond({
-    weight:"400",
+    weight: "400",
     src: "../../../../../public/fonts/AppleGaramond.ttf",
     variable: "--AppleGaramond",
-})
+});
 
 const sfProDisplayLight = SFProDisplayLight({
-    weight:"200",
+    weight: "200",
     src: "../../../../../public/fonts/SFProDisplay-Light.otf",
     variable: "--SFProDisplayLight",
-})
+});
 
 const sfProDisplayMedium = SFProDisplayMedium({
-    weight:"600",
+    weight: "600",
     src: "../../../../../public/fonts/SFProDisplay-Medium.otf",
     variable: "--SFProDisplayMedium",
-})
+});
 
-export default function AnanasGallery(){
+export default function AnanasGallery() {
     const myRouter = useRouter();
 
     return (
@@ -73,10 +73,10 @@ export default function AnanasGallery(){
 
                 <div className={`${sfProDisplayLight.className} flex text-sm md:text-base flex-col items-end`}>
                     <p>
-                        Mobile Software
+                        Web Development
                     </p>
                     <p className={`${appleGaramond.className} text-3xl md:text-5xl -mt-2 md:-mt-3 text-[#BA0000]`}>
-                        zeno
+                        Ananas
                     </p>
                 </div>
             </div>
@@ -95,5 +95,5 @@ export default function AnanasGallery(){
             </div>
             <div className="h-6"></div>
         </div>
-    )
+    );
 }

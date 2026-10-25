@@ -36,20 +36,20 @@ export default function Home() {
                 key="home-page"
             >
                 <motion.div
-                    className={`${appleGaramond.className} flex flex-col md:flex-row items-center justify-center md:justify-between max-w-6xl w-full h-full px-6 md:px-12 lg:px-16 gap-5 md:gap-12 -translate-y-8 md:translate-y-0`}
+                    className={`${appleGaramond.className} flex flex-col md:flex-row items-center justify-center md:justify-center max-w-5xl xl:max-w-7xl w-full h-full px-6 md:px-12 lg:px-16 gap-5 md:gap-16 -translate-y-8 md:translate-y-0`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut", delay: 0.1 }}
                 >
                     {/* Text & Button Column */}
-                    <div className="flex flex-col items-center md:items-start order-2 md:order-1 text-center md:text-left gap-4 md:gap-8 max-w-xl">
-                        <div className="text-[28px] md:text-4xl lg:text-5xl leading-tight pb-1 md:pb-3">
+                    <div className="flex flex-col items-center md:items-start order-2 md:order-1 text-center md:text-left gap-4 md:gap-8 max-w-xl lg:max-w-2xl">
+                        <div className="text-[28px] md:text-4xl lg:text-[44px] xl:text-5xl leading-tight pb-1 md:pb-3">
                             <SplitText
-                                text="I am an interface designer, a web builder, a software developer, and sometimes a photographer."
+                                text="I am an interface designer, a product builder, a software developer, and sometimes a photographer."
                                 splitType="words"
                                 highlightWords={['designer', 'builder', 'developer', 'photographer']}
                                 delay={150}
-                                className="text-2xl md:text-4xl lg:text-5xl"
+                                className="text-2xl md:text-4xl lg:text-[44px] xl:text-5xl"
                             />
                         </div>
                         <motion.div

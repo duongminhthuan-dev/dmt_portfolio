@@ -1,16 +1,12 @@
-"use client"
+"use client";
 
 import SFMono from "next/font/local";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import AppleGaramond from "next/font/local";
 import SFProDisplayLight from "next/font/local";
 import SFProDisplayMedium from "next/font/local";
-import ananas1 from "@/public/images/projects/ananas/overview1.png";
-import ananas2 from "@/public/images/projects/ananas/overview2.webp";
-import ananas3 from "@/public/images/projects/ananas/overview3.webp";
-import ananas4 from "@/public/images/projects/ananas/overview4.png";
+import { CldImage } from "next-cloudinary";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 
@@ -21,33 +17,33 @@ const sfMono = SFMono({
 });
 
 const appleGaramond = AppleGaramond({
-    weight:"400",
+    weight: "400",
     src: "../../../../public/fonts/AppleGaramond.ttf",
     variable: "--AppleGaramond",
-})
+});
 
 const sfProDisplayLight = SFProDisplayLight({
-    weight:"200",
+    weight: "200",
     src: "../../../../public/fonts/SFProDisplay-Light.otf",
     variable: "--SFProDisplayLight",
-})
+});
 
 const sfProDisplayMedium = SFProDisplayMedium({
-    weight:"600",
+    weight: "600",
     src: "../../../../public/fonts/SFProDisplay-Medium.otf",
     variable: "--SFProDisplayMedium",
-})
+});
 
 export default function Ananas() {
     const myRouter = useRouter();
 
     useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-    
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+
         return () => {
-            document.body.style.overflow = '';
-            document.documentElement.style.overflow = '';
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
         };
     }, []);
 
@@ -69,88 +65,149 @@ export default function Ananas() {
                     </div>
 
                     <div className={`${sfProDisplayLight.className} flex text-sm md:text-base flex-col items-end md:items-start text-right md:text-left`}>
-                        <p>Mobile Software</p>
+                        <p>Web Development</p>
                         <p className={`${appleGaramond.className} text-3xl md:text-5xl -mt-2 md:-mt-3 text-[#BA0000]`}>
-                            zeno
+                            Ananas
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="flex flex-col px-4 md:px-8 pb-20 md:pb-36 gap-2 md:gap-4 max-w-5xl lg:max-w-6xl mx-auto w-full text-left">
+                {/* Main Overview Image (Top Image) */}
                 <motion.div
-                    className="h-24 md:h-36 max-h-[300px] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex items-end overflow-hidden"
+                    className="bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
                     style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
                         backdropFilter: "blur(4px)",
                     }}
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                 >
-                    <Image src={ananas1} alt="Ananas 1" className="object-cover h-20 md:h-32 object-bottom w-10/12 mx-auto" />
+                    <div className="relative w-full aspect-[16/9] md:aspect-[16/8] overflow-hidden">
+                        <CldImage
+                            src="ananas_top"
+                            alt="Ananas Top Overview"
+                            fill
+                            priority
+                            className="object-cover object-center"
+                        />
+                    </div>
                 </motion.div>
 
+                {/* Description Block */}
                 <motion.div
-                    className="bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border max-h-[350px] flex overflow-hidden"
-                    style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                        backdropFilter: "blur(4px)",
-                    }}
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
-                    transition={{delay: 0.1}}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="w-full text-left"
                 >
-                    <Image src={ananas2} alt="Ananas 2" className="object-cover scale-95 mx-auto" />
+                    <div className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base my-3 leading-relaxed text-left`}>
+                        <span className="font-bold mb-1 md:text-lg text-left">Ananas - Ecommerce Website Redesign</span>
+                        <p className="text-left w-full">
+                            Redeveloped the Ananas website with a modern, responsive design and intuitive shopping experience.
+                            Built as a Web Programming subject project, featuring a streamlined catalog layout, responsive product views, and interactive cart components.
+                        </p>
+                        <p className="text-sm md:text-base mt-2 text-left">
+                            <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
+                            <span>React, Tailwind CSS, TypeScript</span>
+                        </p>
+                    </div>
                 </motion.div>
 
-                <div className="h-fit flex flex-row gap-2 md:gap-4">
-                    <motion.div
-                        className="flex-3 bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border overflow-hidden"
+                {/* Desktop Showcase 1 (Full Width) */}
+                <motion.div
+                    className="flex-1"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <div
+                        className="aspect-[16/9] md:aspect-[16/8] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex overflow-hidden relative"
                         style={{
                             boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
                             backdropFilter: "blur(4px)",
                         }}
-                        initial={{opacity:0, y:20}}
-                        animate={{opacity:1, y:0}}
-                        transition={{delay: 0.2}}
                     >
-                        <Image src={ananas3} alt="Ananas 3" className="h-full object-scale-down mx-auto p-2 md:p-4" />
+                        <CldImage
+                            src="ananas_thumb_2"
+                            alt="Ananas Storefront Desktop UI"
+                            fill
+                            className="object-cover scale-100 mx-auto"
+                        />
+                    </div>
+                </motion.div>
+
+                {/* Mobile Responsive Screens (Side by side) */}
+                <div className="flex flex-row gap-2 md:gap-4">
+                    <motion.div
+                        className="flex-1"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <div
+                            className="relative aspect-[3/4] md:aspect-[4/5] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
+                            style={{
+                                boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                backdropFilter: "blur(4px)",
+                            }}
+                        >
+                            <CldImage
+                                src="ananas_thumb_1"
+                                alt="Ananas Mobile UI 1"
+                                fill
+                                className="object-cover object-top"
+                            />
+                        </div>
                     </motion.div>
 
                     <motion.div
-                        className="flex-2 bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border overflow-hidden"
-                        style={{
-                            boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                            backdropFilter: "blur(4px)",
-                        }}
-                        initial={{opacity:0, y:20}}
-                        animate={{opacity:1, y:0}}
-                        transition={{delay: 0.3}}
+                        className="flex-1"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
                     >
-                        <Image src={ananas4} alt="Ananas 4" className="object-cover h-full scale-95 mx-auto p-2 md:p-4" />
+                        <div
+                            className="relative aspect-[3/4] md:aspect-[4/5] bg-white/30 rounded-xl md:rounded-2xl border border-gray-200 overflow-hidden"
+                            style={{
+                                boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                                backdropFilter: "blur(4px)",
+                            }}
+                        >
+                            <CldImage
+                                src="ananas_thumb_3"
+                                alt="Ananas Mobile UI 2"
+                                fill
+                                className="object-cover object-top"
+                            />
+                        </div>
                     </motion.div>
                 </div>
 
+                {/* Desktop Showcase 2 (Full Width) */}
                 <motion.div
-                    className="h-fit bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border px-4 md:px-6 py-2 md:py-4 flex flex-col text-left"
-                    style={{
-                        boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
-                        backdropFilter: "blur(4px)",
-                    }}
-                    initial={{opacity:0, y:20}}
-                    animate={{opacity:1, y:0}}
-                    transition={{delay: 0.4}}
+                    className="flex-1"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
                 >
-                    <p className={`${sfProDisplayLight.className} flex flex-col items-start w-full text-sm md:text-base mt-3 leading-relaxed text-left`}>
-                        A React Native app connecting to an ESP32-based smart watch, built for my Logic Design
-                        Project course. I handled the entire app development, from UI/UX design to coding.
-                    </p>
-                    <p className="text-sm md:text-base my-3 text-left">
-                        <span className={`${sfProDisplayMedium.className}`}>Tech stack: </span>
-                        <span className={`${sfProDisplayLight.className}`}>React Native, Firebase, Figma</span>
-                    </p>
+                    <div
+                        className="aspect-[16/9] md:aspect-[16/8] bg-white/30 rounded-xl md:rounded-2xl border-gray-200 border flex overflow-hidden relative"
+                        style={{
+                            boxShadow: "0 2px 10px 0 rgba(0, 0, 0, 0.15)",
+                            backdropFilter: "blur(4px)",
+                        }}
+                    >
+                        <CldImage
+                            src="ananas_thumb_4"
+                            alt="Ananas Product Details Desktop UI"
+                            fill
+                            className="object-cover scale-100 mx-auto"
+                        />
+                    </div>
                 </motion.div>
             </div>
         </div>
-    )
+    );
 }
