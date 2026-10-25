@@ -20,22 +20,23 @@ const sfProDisplayMedium = SFProDisplayMedium({
 
 function BKPopup({ onClose }: { onClose: () => void }) {
     useEffect(() => {
+        const prev = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         return () => {
-            document.body.style.overflow = "auto";
+            document.body.style.overflow = prev;
         }
     }, [])
 
     return (
         <motion.div
-            className="fixed inset-0 w-full h-screen bg-white/50 z-[70] backdrop-blur-lg overflow-hidden"
+            className="fixed inset-0 w-full h-screen h-[100dvh] bg-white/50 z-[70] backdrop-blur-lg overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ ease: "easeInOut", duration: 0.2 }}
         >
             <div
-                className="w-[300px] md:w-[440px] lg:w-[480px] h-full max-h-screen mx-auto relative flex items-center justify-center py-4"
+                className="w-[300px] md:w-[440px] lg:w-[480px] h-full max-h-[100dvh] mx-auto relative flex items-center justify-center py-4"
             >
                 <div className="relative w-full h-[600px] md:h-[720px] lg:h-[760px] max-h-[85vh]">
                     <motion.div
@@ -126,7 +127,7 @@ function BKPopup({ onClose }: { onClose: () => void }) {
                     <button
                         onClick={onClose}
                         aria-label="Close"
-                        className="absolute bottom-[3%] md:bottom-[4%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-30 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
+                        className="absolute bottom-4 md:bottom-[4%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-30 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
                         style={{
                             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.80) 15%, rgba(235, 235, 235, 0.8) 50%, rgba(235, 235, 235, 0.8) 65%, rgba(255, 255, 255, 0.80) 98.08%)',
                             backdropFilter: 'blur(10px)',

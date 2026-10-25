@@ -41,7 +41,7 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
 
     return (
         <motion.div
-            className="fixed inset-0 w-full h-screen z-[70] overflow-hidden"
+            className="fixed inset-0 w-full h-screen h-[100dvh] z-[70] overflow-hidden"
             initial={backdropHidden}
             animate={backdropShown}
             exit={backdropHidden}
@@ -56,9 +56,9 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                 transition={{ ease: "easeInOut", duration: 0.2 }}
             >
                 <div
-                    className="w-[90%] h-full max-h-screen mx-auto relative flex items-center justify-center py-4"
+                    className="w-[90%] h-full max-h-[100dvh] mx-auto relative flex items-center justify-center py-4"
                 >
-                    <div className="flex flex-col gap-3 justify-center items-center h-[78dvh] md:h-[50dvh] w-full md:w-10/12 lg:w-6/12">
+                    <div className="flex flex-col gap-3 justify-center items-center h-[72dvh] md:h-[50dvh] w-full md:w-10/12 lg:w-6/12">
                         <div className="flex flex-row gap-3 h-8/12 w-full">
                             <motion.div
                                 className="relative w-1/2 h-full shadow-lg rounded-xl p-3"
@@ -99,7 +99,7 @@ function MultimediaPopup({ onClose }: { onClose: () => void }) {
                         <button
                             onClick={onClose}
                             aria-label="Close"
-                            className="pointer-events-auto absolute bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
+                            className="pointer-events-auto absolute bottom-4 md:bottom-[3%] left-1/2 transform -translate-x-1/2 p-3 rounded-full z-10 border-1 border-[#DBDBDB] shadow-xl hover:scale-105 active:scale-95 transition-all"
                             style={buttonStyle}
                         >
                             <HugeiconsIcon
