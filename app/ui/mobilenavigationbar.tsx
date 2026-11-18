@@ -107,6 +107,28 @@ export function ContactIcon() {
     )
 }
 
+export function GraduationIcon() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 30 24" fill="none">
+            <g filter="url(#filter0_i_graduation)">
+                <path d="M24.3818 18.4502C24.3818 18.5756 24.3824 18.6661 24.3789 18.752C24.3241 20.0996 23.5972 21.3122 22.4746 21.958C22.4063 21.9972 22.3325 22.0359 22.2344 22.0869L22.2178 22.0947C21.7523 22.3365 21.5013 22.4673 21.2578 22.583C17.2754 24.4724 12.6991 24.4727 8.7168 22.583C8.59509 22.5252 8.46949 22.4639 8.31836 22.3867L7.75586 22.0947L7.73926 22.0869C7.64124 22.036 7.56743 21.9974 7.49902 21.958C6.37624 21.312 5.64921 20.0988 5.59473 18.751C5.59129 18.6657 5.5918 18.5757 5.5918 18.4502V12.9629C6.17512 13.2658 6.80075 13.5855 7.4668 13.9248L11.3311 15.8184C12.9899 16.5077 13.8453 16.7088 14.999 16.709C16.1529 16.7089 16.9068 16.5078 18.542 15.8184L20.6816 14.8545L22.5068 13.9248C23.1727 13.5856 23.7985 13.2657 24.3818 12.9629V18.4502ZM15 0C15.9664 5.07436e-05 16.8735 0.383832 18.6875 1.15039L22.5254 2.77148C27.5083 4.87707 30 5.93014 30 7.64844C30 8.65764 29.1388 9.43481 27.4199 10.333V17.4766C27.4198 17.8906 27.0839 18.2264 26.6699 18.2266H26.5029C26.0888 18.2266 25.753 17.8907 25.7529 17.4766V11.1348C24.828 11.5512 23.7525 12.0069 22.5254 12.5254L18.6875 14.1465C16.8735 14.9131 15.9664 15.2968 15 15.2969C14.0336 15.2969 13.1266 14.9131 11.3125 14.1465L7.47461 12.5254C2.49167 10.4198 5.64631e-05 9.36674 0 7.64844C0 5.93011 2.49161 4.87713 7.47461 2.77148L11.3125 1.15039C13.1266 0.383809 14.0336 0 15 0Z" fill="#B4B4B4"/>
+            </g>
+            <defs>
+                <filter id="filter0_i_graduation" x="0" y="0" width="30" height="27" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="3"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 0.5 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_graduation"/>
+                </filter>
+            </defs>
+        </svg>
+    )
+}
+
 function OrbPNG() {
     return (
         <motion.div
@@ -150,6 +172,7 @@ const NAV_ITEMS = [
     { href: "/aboutme", label: "ABOUT ME", icon: AboutIcon },
     { href: "/works", label: "PROJECTS", icon: WorksIcon },
     { href: "/contact", label: "CONTACT", icon: ContactIcon },
+    { href: "/graduation", label: "GRADUATION", icon: GraduationIcon },
 ];
 
 export default function MobileNavigationBar() {
@@ -158,7 +181,7 @@ export default function MobileNavigationBar() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     useEffect(() => {
-        ["/aboutme", "/works", "/contact"].forEach((route) => router.prefetch(route));
+        ["/aboutme", "/works", "/contact", "/graduation"].forEach((route) => router.prefetch(route));
     }, [router]);
 
     const activeIndex = useMemo(() => {
