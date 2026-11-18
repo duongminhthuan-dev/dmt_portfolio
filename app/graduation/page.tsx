@@ -29,8 +29,6 @@ interface WishItem {
     variant?: string; // Phân loại chi tiết để tránh mua nhầm
     price: string | number;
     link?: string;
-    claimed: boolean;
-    claimedBy?: string;
 }
 
 // Gọi thông qua Next.js Route Handler để tránh lỗi CORS / Failed to fetch
@@ -38,30 +36,13 @@ const API_URL = "/api/wishlist";
 const WISHLIST_PASSCODE = "dmtgrad";
 
 const timelineEvents = [
-    { time: "10:00 - 12:00", content: "Chụp ảnh lưu niệm tại khuôn viên trường" },
-    { time: "14:30 - 17:00", content: "Lễ chính ở hội trường A5" },
-    { time: "17:00 - 17:30", content: "Gặp mặt sau lễ" },
+    { time: "10:00 - 12:00", content: "Campus photo session" },
+    { time: "14:30 - 17:00", content: "Main ceremony at Hall A5" },
+    { time: "17:00 - 17:30", content: "Post-ceremony catch-up" },
 ];
-
-const claimButtonStyle: React.CSSProperties = {
-    borderRadius: "35px",
-    border: "1px solid #F1F1F1",
-    background:
-        "linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(221, 221, 221, 0.30) 31.73%, rgba(221, 221, 221, 0.30) 65.38%, rgba(255, 255, 255, 0.30) 100%)",
-    boxShadow:
-        "0 10px 25px 0 rgba(0, 0, 0, 0.25), 0 3px 7px 0 rgba(0, 0, 0, 0.25)",
-    backdropFilter: "blur(1.5px)",
-    WebkitBackdropFilter: "blur(1.5px)",
-};
 
 function WishlistCard() {
     const [items, setItems] = useState<WishItem[]>([]);
-    const [processingId, setProcessingId] = useState<number | null>(null);
-
-    // State cho Modal nhập tên khi Claim
-    const [selectedItem, setSelectedItem] = useState<WishItem | null>(null);
-    const [giverName, setGiverName] = useState("");
-    const [giverError, setGiverError] = useState("");
 
     useEffect(() => {
         fetch(API_URL)
@@ -79,73 +60,6 @@ function WishlistCard() {
             .catch((err) => console.error("Lỗi tải wishlist:", err));
     }, []);
 
-    // Mở Modal nhập tên khi bấm Claim
-    const handleOpenClaimModal = (item: WishItem) => {
-        setSelectedItem(item);
-        setGiverName("");
-        setGiverError("");
-    };
-
-    // Đóng Modal
-    const handleCloseClaimModal = () => {
-        if (processingId) return; // Không đóng khi đang gửi API
-        setSelectedItem(null);
-        setGiverName("");
-        setGiverError("");
-    };
-
-    // Xác nhận gửi Claim kèm tên
-    const handleSubmitClaim = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!selectedItem) return;
-
-        const trimmedName = giverName.trim();
-        if (!trimmedName) {
-            setGiverError("Vui lòng nhập tên hoặc nickname của bạn");
-            return;
-        }
-
-        const itemToClaim = selectedItem;
-        setProcessingId(itemToClaim.id);
-
-        // Optimistic UI Update
-        setItems((prev) =>
-            prev.map((i) =>
-                i.id === itemToClaim.id ? { ...i, claimed: true, claimedBy: trimmedName } : i
-            )
-        );
-
-        try {
-            const res = await fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: itemToClaim.id,
-                    giverName: trimmedName,
-                }),
-            });
-
-            if (!res.ok) {
-                const errJson = await res.json().catch(() => ({}));
-                throw new Error(errJson.details || errJson.error || errJson.message || "Không thể cập nhật Google Sheet");
-            }
-
-            // Đóng Modal sau khi thành công
-            setSelectedItem(null);
-        } catch (err: any) {
-            console.error("Lỗi cập nhật:", err);
-            // Rollback optimistic update
-            setItems((prev) =>
-                prev.map((i) => (i.id === itemToClaim.id ? { ...i, claimed: false, claimedBy: undefined } : i))
-            );
-            alert(`Lỗi: ${err.message || "Vui lòng thử lại sau"}`);
-        } finally {
-            setProcessingId(null);
-        }
-    };
-
     return (
         <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
@@ -154,162 +68,44 @@ function WishlistCard() {
                     .map((item: WishItem) => (
                         <div
                             key={item.id}
-                            className={`py-3.5 md:py-4 px-4 md:px-5 rounded-xl md:rounded-2xl border flex flex-col justify-between transition-all duration-300 ${
-                                item.claimed
-                                    ? "bg-neutral-100 border-neutral-200 opacity-60"
-                                    : "bg-white/80 backdrop-blur border-neutral-300 shadow-xs hover:shadow-md hover:border-neutral-400/80"
-                            }`}
+                            className="py-3.5 md:py-4 px-4 md:px-5 rounded-xl md:rounded-2xl border flex flex-col justify-between transition-all duration-300 bg-white/80 backdrop-blur border-neutral-300 shadow-xs hover:shadow-md hover:border-neutral-400/80"
                         >
-                            <div>
-                                <div className="flex justify-between items-start gap-4 mb-2">
-                                    {/* Tên sản phẩm chính */}
-                                    <h3 className={`${sfProDisplayMedium.className} text-sm md:text-base text-neutral-800 leading-snug`}>
-                                        {item.title}
-                                    </h3>
+                            <div className="flex justify-between items-start gap-4 mb-3">
+                                {/* Tên sản phẩm chính */}
+                                <h3 className={`${sfProDisplayMedium.className} text-sm md:text-base text-neutral-800 leading-snug`}>
+                                    {item.title}
+                                </h3>
 
-                                    <span className="inline-block text-xs md:text-sm font-mono tracking-tight mt-0.5 shrink-0 text-neutral-600">
-                                        {typeof item.price === "number" ? `${item.price.toLocaleString("vi-VN")}đ` : item.price}
-                                    </span>
-                                </div>
+                                <span className="inline-block text-xs md:text-sm font-mono tracking-tight mt-0.5 shrink-0 text-neutral-600">
+                                    {typeof item.price === "number" ? `${item.price.toLocaleString("vi-VN")}đ` : item.price}
+                                </span>
+                            </div>
 
-                                <div className="flex justify-between items-center mt-3 pt-2 border-t border-neutral-100/80">
+                            {(item.variant || item.link) && (
+                                <div className="flex justify-between items-center gap-3 mt-auto pt-2.5 border-t border-neutral-100/80">
                                     {/* Dòng phân loại chi tiết / Variant để không mua nhầm */}
-                                    {item.variant ? (
-                                        <p className={`${sfProDisplayLight.className} text-xs md:text-sm font-mono inline-block text-neutral-500 truncate max-w-[140px] md:max-w-[170px]`}>
+                                    {item.variant && (
+                                        <p className={`${sfProDisplayLight.className} text-xs md:text-sm font-mono text-neutral-500 truncate min-w-0`}>
                                             Phân loại: {item.variant}
                                         </p>
-                                    ) : item.claimed && item.claimedBy ? (
-                                        <p className={`${sfProDisplayLight.className} text-xs md:text-sm font-mono inline-block text-neutral-400 truncate max-w-[140px] md:max-w-[170px]`}>
-                                            Bởi: {item.claimedBy}
-                                        </p>
-                                    ) : (
-                                        <div/>
                                     )}
 
-                                    {/* Nút bấm claim ở góc dưới bên phải */}
-                                    <div className="flex justify-end items-center gap-1.5 md:gap-2">
-                                        <button
-                                            onClick={() => {
-                                                if (item.link) {
-                                                    window.open(item.link, "_blank");
-                                                }
-                                            }}
-                                            disabled={item.claimed || processingId === item.id}
-                                            className="text-xs md:text-sm px-2.5 md:px-3 py-1 rounded-full transition-all duration-200 select-none underline text-neutral-600 hover:text-neutral-900 cursor-pointer"
+                                    {/* Nút Link luôn nằm ở góc dưới bên phải */}
+                                    {item.link && (
+                                        <a
+                                            href={item.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="ml-auto shrink-0 text-xs md:text-sm px-3 md:px-3.5 py-1 md:py-1.5 rounded-full transition-all duration-200 select-none text-neutral-700 hover:text-[#BA0000] bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200 font-medium active:scale-95"
                                         >
                                             Link
-                                        </button>
-
-                                        <button
-                                            onClick={() => !item.claimed && handleOpenClaimModal(item)}
-                                            disabled={item.claimed || processingId === item.id}
-                                            style={!item.claimed ? claimButtonStyle : { borderRadius: "35px" }}
-                                            className={`text-xs md:text-sm px-3 md:px-4 py-1 md:py-1.5 transition-all duration-200 select-none font-medium ${
-                                                item.claimed
-                                                    ? "bg-neutral-200/80 text-neutral-400 cursor-not-allowed border border-neutral-200"
-                                                    : "text-neutral-900 hover:text-[#BA0000] active:scale-95 cursor-pointer"
-                                            }`}
-                                        >
-                                            {processingId === item.id ? "Claiming..." : item.claimed ? "Claimed" : "Claim"}
-                                        </button>
-                                    </div>
+                                        </a>
+                                    )}
                                 </div>
-                            </div>
+                            )}
                         </div>
                     ))}
             </div>
-
-            {/* Modal Glassmorphism xác nhận và nhập Tên khi Claim */}
-            {selectedItem && (
-                <div
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/40 backdrop-blur-xs"
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) handleCloseClaimModal();
-                    }}
-                >
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 12 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 12 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="w-full max-w-sm md:max-w-md p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white/95 border border-neutral-200 shadow-2xl backdrop-blur-xl flex flex-col text-left"
-                    >
-                        <div className="flex items-start justify-between gap-3 mb-2 md:mb-3">
-                            <div>
-                                <span className="text-[11px] md:text-xs font-mono tracking-wider text-neutral-400 uppercase">
-                                    Xác nhận tặng quà
-                                </span>
-                                <h4 className={`${appleGaramondItalic.className} text-2xl md:text-3xl text-neutral-900 leading-tight mt-0.5`}>
-                                    {selectedItem.title}
-                                </h4>
-                            </div>
-
-                            <button
-                                type="button"
-                                onClick={handleCloseClaimModal}
-                                disabled={processingId !== null}
-                                className="text-neutral-400 hover:text-neutral-700 p-1 -mr-1 -mt-1 transition-colors cursor-pointer"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"/>
-                                    <line x1="6" y1="6" x2="18" y2="18"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        {selectedItem.variant && (
-                            <p className={`${sfProDisplayLight.className} text-xs md:text-sm text-neutral-500 mb-4 md:mb-5`}>
-                                Phân loại: <span className="font-mono text-neutral-700">{selectedItem.variant}</span>
-                            </p>
-                        )}
-
-                        <form onSubmit={handleSubmitClaim} className="flex flex-col gap-3 md:gap-4 mt-1">
-                            <div>
-                                <label className="block text-xs md:text-sm font-mono text-neutral-600 mb-1.5">
-                                    Tên hoặc nickname của bạn:
-                                </label>
-                                <input
-                                    type="text"
-                                    value={giverName}
-                                    onChange={(e) => {
-                                        setGiverName(e.target.value);
-                                        if (giverError) setGiverError("");
-                                    }}
-                                    placeholder="vd: Minh Tuấn c3, Thảo Design..."
-                                    maxLength={50}
-                                    disabled={processingId !== null}
-                                    className="w-full px-3.5 md:px-4 py-2 md:py-2.5 text-sm md:text-base rounded-xl border border-neutral-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#BA0000]/40 focus:border-[#BA0000] transition-all text-neutral-800 placeholder:text-neutral-400"
-                                />
-                                {giverError && (
-                                    <p className="text-xs md:text-sm text-[#BA0000] mt-1 font-sans">
-                                        {giverError}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex items-center justify-end gap-2 md:gap-3 mt-3 pt-3 border-t border-neutral-100">
-                                <button
-                                    type="button"
-                                    onClick={handleCloseClaimModal}
-                                    disabled={processingId !== null}
-                                    className="px-4 py-2 md:py-2.5 rounded-xl text-xs md:text-sm text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
-                                >
-                                    Hủy
-                                </button>
-
-                                <button
-                                    type="submit"
-                                    disabled={processingId !== null}
-                                    style={claimButtonStyle}
-                                    className="px-5 md:px-6 py-2 md:py-2.5 text-xs md:text-sm font-medium text-neutral-900 hover:text-[#BA0000] active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
-                                >
-                                    {processingId ? "Đang lưu..." : "Xác nhận"}
-                                </button>
-                            </div>
-                        </form>
-                    </motion.div>
-                </div>
-            )}
         </div>
     );
 }
@@ -417,7 +213,7 @@ export default function Graduation() {
                 {/* Section 2: Graduation Details & Thesis (Timeline trải dài toàn bộ trang, nằm ngang trên desktop) */}
                 <div className="h-screen w-full flex flex-col justify-center px-6 md:px-16 py-8 md:py-16 overflow-hidden">
                     <div className="w-full max-w-6xl mx-auto mb-8 md:mb-16">
-                        <h3 className={`text-3xl md:text-4xl color-word ${appleGaramondItalic.className}`}>
+                        <h3 className={`text-3xl md:text-4xl lg:text-5xl color-word ${appleGaramondItalic.className}`}>
                             Timeline
                         </h3>
                     </div>
