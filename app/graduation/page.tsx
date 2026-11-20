@@ -29,6 +29,7 @@ interface WishItem {
     variant?: string; // Phân loại chi tiết để tránh mua nhầm
     price: string | number;
     link?: string;
+    claimed?: boolean | string;
 }
 
 // Gọi thông qua Next.js Route Handler để tránh lỗi CORS / Failed to fetch
@@ -65,46 +66,65 @@ function WishlistCard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
                 {items
                     .filter((item: WishItem) => item.title && item.title.trim() !== "")
-                    .map((item: WishItem) => (
-                        <div
-                            key={item.id}
-                            className="py-3.5 md:py-4 px-4 md:px-5 rounded-xl md:rounded-2xl border flex flex-col justify-between transition-all duration-300 bg-white/80 backdrop-blur border-neutral-300 shadow-xs hover:shadow-md hover:border-neutral-400/80"
-                        >
-                            <div className="flex justify-between items-start gap-4 mb-3">
-                                {/* Tên sản phẩm chính */}
-                                <h3 className={`${sfProDisplayMedium.className} text-sm md:text-base text-neutral-800 leading-snug`}>
-                                    {item.title}
-                                </h3>
+                    .map((item: WishItem) => {
+                        const isClaimed =
+                            item.claimed === true ||
+                            String(item.claimed).toLowerCase() === "true";
 
-                                <span className="inline-block text-xs md:text-sm font-mono tracking-tight mt-0.5 shrink-0 text-neutral-600">
-                                    {typeof item.price === "number" ? `${item.price.toLocaleString("vi-VN")}đ` : item.price}
-                                </span>
-                            </div>
+                        return (
+                            <div
+                                key={item.id}
+                                className={`py-3.5 md:py-4 px-4 md:px-5 rounded-xl md:rounded-2xl border flex flex-col justify-between transition-all duration-300 ${
+                                    isClaimed
+                                        ? "bg-neutral-100 border-neutral-200 opacity-50 select-none"
+                                        : "bg-white/80 backdrop-blur border-neutral-300 shadow-xs hover:shadow-md hover:border-neutral-400/80"
+                                }`}
+                            >
+                                <div className="flex justify-between items-start gap-4 mb-3">
+                                    {/* Tên sản phẩm chính */}
+                                    <h3 className={`${sfProDisplayMedium.className} text-sm md:text-base text-neutral-800 leading-snug`}>
+                                        {item.title}
+                                    </h3>
 
-                            {(item.variant || item.link) && (
-                                <div className="flex justify-between items-center gap-3 mt-auto pt-2.5 border-t border-neutral-100/80">
-                                    {/* Dòng phân loại chi tiết / Variant để không mua nhầm */}
-                                    {item.variant && (
-                                        <p className={`${sfProDisplayLight.className} text-xs md:text-sm font-mono text-neutral-500 truncate min-w-0`}>
-                                            Phân loại: {item.variant}
-                                        </p>
-                                    )}
-
-                                    {/* Nút Link luôn nằm ở góc dưới bên phải */}
-                                    {item.link && (
-                                        <a
-                                            href={item.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="ml-auto shrink-0 text-xs md:text-sm px-3 md:px-3.5 py-1 md:py-1.5 rounded-full transition-all duration-200 select-none text-neutral-700 hover:text-[#BA0000] bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200 font-medium active:scale-95"
-                                        >
-                                            Link
-                                        </a>
-                                    )}
+                                    <span className="inline-block text-xs md:text-sm font-mono tracking-tight mt-0.5 shrink-0 text-neutral-600">
+                                        {typeof item.price === "number" ? `${item.price.toLocaleString("vi-VN")}đ` : item.price}
+                                    </span>
                                 </div>
-                            )}
-                        </div>
-                    ))}
+
+                                {(item.variant || item.link) && (
+                                    <div className="flex justify-between items-center gap-3 mt-auto pt-2.5 border-t border-neutral-100/80">
+                                        {/* Dòng phân loại chi tiết / Variant để không mua nhầm */}
+                                        {item.variant && (
+                                            <p className={`${sfProDisplayLight.className} text-xs md:text-sm font-mono text-neutral-500 truncate min-w-0`}>
+                                                Phân loại: {item.variant}
+                                            </p>
+                                        )}
+
+                                        {/* Nút Link luôn nằm ở góc dưới bên phải */}
+                                        {item.link && (
+                                            isClaimed ? (
+                                                <span
+                                                    aria-disabled="true"
+                                                    className="ml-auto shrink-0 text-xs md:text-sm px-3 md:px-3.5 py-1 md:py-1.5 rounded-full select-none text-neutral-400 bg-neutral-200/70 border border-neutral-200 font-medium cursor-not-allowed pointer-events-none"
+                                                >
+                                                    Link
+                                                </span>
+                                            ) : (
+                                                <a
+                                                    href={item.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="ml-auto shrink-0 text-xs md:text-sm px-3 md:px-3.5 py-1 md:py-1.5 rounded-full transition-all duration-200 select-none text-neutral-700 hover:text-[#BA0000] bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200 font-medium active:scale-95"
+                                                >
+                                                    Link
+                                                </a>
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     );
